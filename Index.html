@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeMarker Sigadoc</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button class="menu-toggle" id="menu-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            Freemarker para Siga-Doc
+        </div>
+        <nav id="doc-nav">
+            <ul>
+                <li><a href="#introducao" class="nav-link active">Introdução</a></li>
+                <li><a href="#primeiros-passos" class="nav-link">Primeiros Passos</a></li>
+                <li><a href="#componentes" class="nav-link">Parâmetros</a></li>
+                <li><a href="#api" class="nav-link">Referências</a></li>
+                <li><a href="#contribuindo" class="nav-link">Macros</a></li>
+                <li><a href="#contribuindo" class="nav-link">Macros02</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <!-- Seção de Introdução -->
+        <section id="introducao" class="content-section active">
+            <h1>Introdução</h1>
+            <p>Bem-vindo à documentação oficial do <strong>Freemarker para SigaDoc Sorriso</strong>. Aqui você encontrará todas as informações necessárias para começar a usar a ferramenta, desde a utilização de macros já criadas e criação das próprias macros.</p>
+            <p>O siga-Doc foi desenvolvido pelo TRF2 e distribuido de forma OpenSource no GitHub, ele utiliza Java 8 no Backend e BootStrap com FreeMarker para Fontend
+               Por muito tempo o projeto ficou sem documentação tanto de Backend quanto frontend, esperamos que essa documentação ajude os desenvolvedores que iram trabalhar futuramente com o sistema.
+               Desde já agradeço sua atenção.
+            </br></br>
+               Essa documentação foi criado por: Thainan Vinicius Katchan | <a style="text-decoration: none; color: black;" href="https://github.com/ThainanViniciusKatchan">GitHub</a>   
+            </p>
+
+            <h2>O que é Freemarker</h2>
+            <p>O FreeMarker é um motor de templates em Java para gerar qualquer tipo de texto de saída (como páginas HTML, e-mails e arquivos de configuração) 
+                a partir de modelos escritos na FreeMarker Template Language (FTL) e dados variáveis. Sua principal utilidade é separar a lógica de apresentação ]
+                da camada de lógica de negócio, permitindo a criação de conteúdo dinâmico de forma eficiente e organizada:
+                <a href="https://freemarker.apache.org/index.html">Saiba Mais</a></p>
+
+            <h2>Pré-requisitos</h2>
+            <p>Antes de começar, certifique-se de que você tem:</p>
+            <ul>
+                <li>Conhecimento Básico de lógica de programação</li>
+                <li>Java 8 ></li>
+                <li>Conhecimento básico de HTML5 e CSS3</li>
+            </ul>
+        </section>
+
+        <!-- Seção de Primeiros Passos -->
+        <section id="primeiros-passos" class="content-section">
+            <h1>Primeiros Passos</h1>
+            <p>Siga estes passos para urilizar o FreeMarker em seu ambiente local.</p>
+
+            <h2>Principais Macros (Já existentes no Siga-Doc)</h2>
+
+            <h3>Macro Entrevista</h3>
+            <p>Essa macro serve para a criaçõa de formulários, ela faz o trabalho de reconhecer as marcos de campo e traduzir para
+                código html com BootStrap.
+            </p>
+            <pre>
+                <code>
+[@Entrevista]
+[/@Entrevista]
+                </code>
+            </pre>
+            
+            <h3>Macro Documento</h3>
+            <p> A macro Documento tem o papel de receber códigos HTML5 e CSS3, básicamente é ela quem vai mostrar seu modelo pronto formato de PDF. 
+                
+            </p>
+            <pre>
+                <code>
+[@documento]
+[/@documento]
+                </code>
+            </pre>
+
+            <h3>Macro Cabeçalho</h3>
+            <p>Essa macro é responsável por mostrar um cabeçalho no seu documento, por padrão o sistema vem com algun modelos prontos,
+                como a macro [@EstiloBrasaoCentralizado], além de montar e exibir um cabeçalho essa macro também é responsável pela númeração das páginas,
+                mostrar a classificação documental, receber o tipo de documento, e pode receber alguns parâmetros personalizados, como exibir a data na parte de
+                cima ou de baixo do documento. 
+            </p>
+            <pre>
+                <code>
+[@EstiloBrasaoCentralizado]
+[/@EstiloBrasaoCentralizado]
+                </code>
+            </pre>
+
+            <h3>Macro Campo</h3>
+            <p>A macro [@Campo] de forma geral é o que vai formar seu formulário, elas são responsáveis por criar inputs de diversos tipos,
+                como texto, número, email, cpf, .etc, abordaremos para a frete os tipos de inputs que o sistema suporta nativamente. 
+            </br></br>
+            Perceba que essa macro se ínicia e fecha na mesma linha, sem a necessidade de um corpo.
+            </p>
+            <pre>
+                <code>
+[@campo/]
+                </code>
+            </pre>
+            
+        </section>
+
+        <!-- Seção de Componentes -->
+        <section id="componentes" class="content-section">
+            <h1>Componentes</h1>
+            <p>O projeto oferece uma variedade de componentes reutilizáveis para agilizar seu desenvolvimento.</p>
+
+            <h2>Botão (Button)</h2>
+            <p>Um componente de botão versátil que suporta vários estilos e eventos.</p>
+            <pre><code>import { Button } from 'meu-projeto/ui';
+
+function MeuApp() {
+  return &lt;Button onClick={() => alert('Clicado!')}&gt;Clique Aqui&lt;/Button&gt;;
+}</code></pre>
+            
+            <h2>Cartão (Card)</h2>
+            <p>Use o componente Card para exibir conteúdo em um container visualmente agradável.</p>
+            <pre><code>import { Card } from 'meu-projeto/ui';
+
+function PerfilUsuario() {
+  return (
+    &lt;Card title="Usuário"&gt;
+      &lt;p&gt;Este é o conteúdo dentro do card.&lt;/p&gt;
+    &lt;/Card&gt;
+  );
+}</code></pre>
+        </section>
+
+        <!-- Seção de API -->
+        <section id="api" class="content-section">
+            <h1>Referência da API</h1>
+            <p>Detalhes sobre os principais métodos disponíveis na nossa API.</p>
+            
+            <h3><code>meuProjeto.fetchData(id)</code></h3>
+            <p>Busca dados de um recurso específico pelo ID.</p>
+            <ul>
+                <li><strong>Parâmetros:</strong> <code>id</code> (string) - O identificador único do recurso.</li>
+                <li><strong>Retorna:</strong> Uma <code>Promise</code> que resolve com os dados do recurso.</li>
+            </ul>
+            <pre><code>meuProjeto.fetchData('user-123')
+  .then(data => {
+    console.log('Dados recebidos:', data);
+  })
+  .catch(error => {
+    console.error('Falha ao buscar dados:', error);
+  });</code></pre>
+        </section>
+        
+        <!-- Seção de Contribuição -->
+        <section id="contribuindo" class="content-section">
+            <h1>Como Contribuir</h1>
+            <p>Ficamos felizes com o seu interesse em contribuir! O projeto é de código aberto e qualquer ajuda é bem-vinda.</p>
+            
+            <h2>Reportando Bugs</h2>
+            <p>Se você encontrar um bug, por favor, abra uma "issue" em nosso repositório no GitHub. Inclua o máximo de detalhes possível, como a versão que você está usando, os passos para reproduzir o erro e o que você esperava que acontecesse.</p>
+            
+            <h2>Sugestão de Melhorias</h2>
+            <p>Para sugerir novas funcionalidades ou melhorias, você também pode abrir uma "issue" descrevendo sua ideia. Adoramos ouvir o feedback da comunidade!</p>
+            
+            <h2>Enviando um Pull Request</h2>
+            <p>Para contribuir com código, siga os seguintes passos:</p>
+            <ol>
+                <li>Faça um "fork" do repositório.</li>
+                <li>Crie uma nova "branch" para sua feature (<code>git checkout -b minha-feature</code>).</li>
+                <li>Faça o "commit" de suas alterações (<code>git commit -m 'Adiciona nova feature'</code>).</li>
+                <li>Envie para a sua branch (<code>git push origin minha-feature</code>).</li>
+                <li>Abra um Pull Request no repositório principal.</li>
+            </ol>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
