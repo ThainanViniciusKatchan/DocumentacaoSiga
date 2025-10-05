@@ -25,6 +25,33 @@
             display: flex;
         }
 
+        img {
+            width: 100%;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 5px;
+            transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        img:hover {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .DropTextclick {
+            cursor: pointer;
+            transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            width: 150px;
+            padding: 2px;
+            border-radius: 5px;
+        }
+
+        .DropTextclick:hover {
+            margin-left: 5px;
+            background-color: var(--cor-primaria);
+            color: white;
+            transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
         /* --- Layout Principal --- */
         .container {
             display: flex;
@@ -49,6 +76,16 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--cor-primaria);
+        }
+
+        .texto-link {
+            color: #212529;
+            text-decoration: dashed;
+        }
+
+        .texto-link:hover {
+            color: #181a1d;
+            text-decoration: underline;
         }
 
         .sidebar nav ul {
