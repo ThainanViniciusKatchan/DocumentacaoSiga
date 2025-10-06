@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,45 +10,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <button class="menu-toggle" id="menu-toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
     </button>
-    
+
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            Freemarker para Siga-Doc
+            <p style="margin-bottom: -10px;">SigaDoc Sorriso</p>
+            Macros FreeMarker
+            <hr>
         </div>
         <nav id="doc-nav">
             <ul>
                 <li><a href="#introducao" class="nav-link active">Introdução</a></li>
                 <li><a href="#primeiros-passos" class="nav-link">Primeiros Passos</a></li>
-                <li><a href="#Entrevista" class="nav-link">Macro Campo</a></li>
-                <li><a href="#api" class="nav-link">Macro Entrevista e Grupo</a></li>
-                <li><a href="#contribuindo" class="nav-link">Macro Documento</a></li>
-                <li><a href="#contribuindo" class="nav-link">Macros02</a></li>
+
+                <li class="dropdown">
+                    <a href="#Entrevista" class="nav-link dropdown-toggle">Formulários</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#Entrevista" class="nav-link" style="margin-top: 5px;">Macro Campo</a></li>
+                        <li><a href="#api" class="nav-link">Macro Entrevista e Grupo</a></li>
+                        <li><a href="#contribuindo" class="nav-link">Usando HTML no formulário</a></li>
+                        <li><a href="#FreeMarkerForm" class="nav-link">Usando freemarker no formulário</a></li>
+                    </ul>
+                </li>
+                <li><a href="#macros02" class="nav-link">Macros02</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="main-content">
-        <!-- Seção de Introdução -->
         <section id="introducao" class="content-section active">
             <h1>Introdução</h1>
-            <p>Bem-vindo à documentação oficial do <strong>Freemarker para SigaDoc Sorriso</strong>. Aqui você encontrará todas as informações necessárias para começar a usar a ferramenta, desde a utilização de macros já criadas e criação das próprias macros.</p>
-            <p>O siga-Doc foi desenvolvido pelo TRF2 e distribuido de forma OpenSource no GitHub, ele utiliza Java 8 no Backend e BootStrap com FreeMarker para Fontend
-               Por muito tempo o projeto ficou sem documentação tanto de Backend quanto frontend, esperamos que essa documentação ajude os desenvolvedores que iram trabalhar futuramente com o sistema.
-               Desde já agradeço sua atenção.
-            </br></br>
-               Essa documentação foi criado por: Thainan Vinicius Katchan | <a target="_blank" style="text-decoration: none; color: black;" href="https://github.com/ThainanViniciusKatchan">GitHub</a>   
+            <p>Bem-vindo à documentação oficial do <strong>Freemarker para SigaDoc Sorriso</strong>. Aqui você
+                encontrará todas as informações necessárias para começar a usar a ferramenta, desde a utilização de
+                macros já criadas e criação das próprias macros.</p>
+            <p>O siga-Doc foi desenvolvido pelo TRF2 e distribuido de forma OpenSource no GitHub, ele utiliza Java 8 no
+                Backend e BootStrap com FreeMarker para Fontend
+                Por muito tempo o projeto ficou sem documentação tanto de Backend quanto frontend, esperamos que essa
+                documentação ajude os desenvolvedores que iram trabalhar futuramente com o sistema.
+                Desde já agradeço sua atenção.
+                </br></br>
+                Essa documentação foi criado por: Thainan Vinicius Katchan | <a target="_blank"
+                    style="text-decoration: none; color: black;"
+                    href="https://github.com/ThainanViniciusKatchan">GitHub</a>
             </p>
 
             <h2>O que é Freemarker</h2>
-            <p>O FreeMarker é um motor de templates em Java para gerar qualquer tipo de texto de saída (como páginas HTML, e-mails e arquivos de configuração) 
-                a partir de modelos escritos na FreeMarker Template Language (FTL) e dados variáveis. Sua principal utilidade é separar a lógica de apresentação ]
-                da camada de lógica de negócio, permitindo a criação de conteúdo dinâmico de forma eficiente e organizada:
-                <a target="_blank" href="https://freemarker.apache.org/index.html">Saiba Mais</a></p>
+            <p>O FreeMarker é um motor de templates em Java para gerar qualquer tipo de texto de saída (como páginas
+                HTML, e-mails e arquivos de configuração)
+                a partir de modelos escritos na FreeMarker Template Language (FTL) e dados variáveis. Sua principal
+                utilidade é separar a lógica de apresentação ]
+                da camada de lógica de negócio, permitindo a criação de conteúdo dinâmico de forma eficiente e
+                organizada:
+                <a target="_blank" href="https://freemarker.apache.org/index.html">Saiba Mais</a>
+            </p>
 
             <h2>Pré-requisitos</h2>
             <p>Antes de começar, certifique-se de que você tem:</p>
@@ -58,29 +83,31 @@
             </ul>
         </section>
 
-        <!-- Primeiros Passos -->
         <section id="primeiros-passos" class="content-section">
-            
+
             <h1>Primeiros Passos</h1>
             <p>Siga estes passos para utilizar o FreeMarker em seu ambiente local.</p>
 
             <h2>Principais Macros (Já existentes no Siga-Doc)</h2>
             <hr>
             <h3 id="campoPrimeirosPassos">Macro Campo</h3>
-            <p>A macro [@campo/] de forma geral é o que vai formar seu formulário, elas são responsáveis por criar inputs de diversos tipos,
-                como texto, número, email, cpf, .etc, abordaremos para a frete os tipos de inputs que o sistema suporta nativamente. 
-            </br></br>
-            Perceba que essa macro se ínicia e fecha na mesma linha, sem a necessidade de um corpo.
+            <p>A macro [@campo/] de forma geral é o que vai formar seu formulário, elas são responsáveis por criar
+                inputs de diversos tipos,
+                como texto, número, email, cpf, .etc, abordaremos para a frete os tipos de inputs que o sistema suporta
+                nativamente.
+                </br></br>
+                Perceba que essa macro se ínicia e fecha na mesma linha, sem a necessidade de um corpo.
             </p>
-            
+
             <pre>
                 <code>
 [@campo/]</code>
             </pre>
             <hr>
             <h3 id="campoPrimeirosPassos">Macro Grupo</h3>
-            <p>A macro [@grupo/] ajuda a organizar seus campos em grupos com um titulo e separados por uma linha, ela contem um corpo, onde ficara as macros de campo.
-            </p> 
+            <p>A macro [@grupo/] ajuda a organizar seus campos em grupos com um titulo e separados por uma linha, ela
+                contem um corpo, onde ficara as macros de campo.
+            </p>
             <pre>
                 <code>
 [@grupo]
@@ -89,7 +116,8 @@
             </pre>
             <hr>
             <h3 id="EntrevistaPrimeirosPassos">Macro Entrevista</h3>
-            <p>Essa macro serve para a criaçõa de formulários, ela faz o trabalho de reconhecer as marcos de campo e traduzir para
+            <p>Essa macro serve para a criaçõa de formulários, ela faz o trabalho de reconhecer as marcos de campo e
+                traduzir para
                 código html com BootStrap.
             </p>
             <pre>
@@ -99,8 +127,9 @@
             </pre>
             <hr>
             <h3>Macro Documento</h3>
-            <p> A macro Documento tem o papel de receber códigos HTML5 e CSS3, básicamente é ela quem vai mostrar seu modelo pronto formato de PDF. 
-                
+            <p> A macro Documento tem o papel de receber códigos HTML5 e CSS3, básicamente é ela quem vai mostrar seu
+                modelo pronto formato de PDF.
+
             </p>
             <pre>
                 <code>
@@ -109,24 +138,29 @@
             </pre>
             <hr>
             <h3>Macro Cabeçalho</h3>
-            <p>Essa macro é responsável por mostrar um cabeçalho no seu documento, por padrão o sistema vem com algun modelos prontos,
-                como a macro [@estiloBrasaoCentralizado], além de montar e exibir um cabeçalho essa macro também é responsável pela númeração das páginas,
-                mostrar a classificação documental, receber o tipo de documento, e pode receber alguns parâmetros personalizados, como exibir a data na parte de
-                cima ou de baixo do documento. 
+            <p>Essa macro é responsável por mostrar um cabeçalho no seu documento, por padrão o sistema vem com algun
+                modelos prontos,
+                como a macro [@estiloBrasaoCentralizado], além de montar e exibir um cabeçalho essa macro também é
+                responsável pela númeração das páginas,
+                mostrar a classificação documental, receber o tipo de documento, e pode receber alguns parâmetros
+                personalizados, como exibir a data na parte de
+                cima ou de baixo do documento.
             </p>
             <pre>
                 <code>
 [@estiloBrasaoCentralizado]
 [/@estiloBrasaoCentralizado]</code>
-            </pre>    
+            </pre>
         </section>
 
-        <!-- Macro Campo -->
+        <!-- Parte sobre Formulários -->
         <section id="Entrevista" class="content-section">
-            <h1>Como usar a macro <a class="texto-link" href="#campoPrimeirosPassos">[@campo/]</a></h1>
-            <p>Como dito anteriormente a macro [@campo/] não terá um corpo ela ínicia e acaba na mesma linha sendo fechada por uma "/",
-                Essa macro suporta alguns parâmetros os quais podem variar dependendo do tipo do campo, porém todos os campos compartilham parâmetros entre eles os quais são:
-            </br></br>
+            <h1>Como usar a macro [@campo/]</h1>
+            <p>Como dito anteriormente a macro [@campo/] não terá um corpo ela ínicia e acaba na mesma linha sendo
+                fechada por uma "/",
+                Essa macro suporta alguns parâmetros os quais podem variar dependendo do tipo do campo, porém todos os
+                campos compartilham parâmetros entre eles os quais são:
+                </br></br>
             <details>
                 <summary class="DropTextclick">Parâmetros</summary>
                 <div style="margin-left: 8px;">
@@ -138,41 +172,43 @@
                     <strong>maxcaracteres=""</strong></br>
                     <strong>reler=""</strong></br>
                     <strong>atts=""</strong></br>
-                </div>    
+                </div>
             </details>
             </p>
 
             <h2>Parâmetro (tipo)</h2>
             <p>Como o próprio nome descreve, nele você irá escolher o tipo de campo, podendo ser:
-                <details >
-                    <summary class="DropTextclick">Tipos de Campo</summary>
-                    <ol style="text-align: start; padding-bottom: 10px; margin-left: 8px;">
-                        <li><strong>texto:</strong> Campo de texto padrão</li>
-                        <li><strong>numero:</strong> Campo de texto para entrada de número inteiro</li>
-                        <li><strong>oculto:</strong> Campo do tipo "hidden" do HTML</li>
-                        <li><strong>cpf:</strong> Campo de texto para entrada de CPF</li>
-                        <li><strong>memo:</strong>  Campo do tipo "textarea" do HTML</li>
-                        <li><strong>editor:</strong>  Campo para mostrar o CKEditor</li>
-                        <li><strong>cnpj:</strong>  Campo de texto para entrada de CNPJ</li>
-                        <li><strong> selecao:</strong> Campo do tipo "select" do HTML, para as opções se usa o parâmetro 
-                            <strong>opcao=""</strong> separando as opções por <strong>";"</strong>:</li>
-                            <br>
-                            <strong>Exemplo de campo do tipo selecao:</strong>
-                            <pre>
+            <details>
+                <summary class="DropTextclick">Tipos de Campo</summary>
+                <ol style="text-align: start; padding-bottom: 10px; margin-left: 8px;">
+                    <li><strong>texto:</strong> Campo de texto padrão</li>
+                    <li><strong>numero:</strong> Campo de texto para entrada de número inteiro</li>
+                    <li><strong>oculto:</strong> Campo do tipo "hidden" do HTML</li>
+                    <li><strong>cpf:</strong> Campo de texto para entrada de CPF</li>
+                    <li><strong>memo:</strong> Campo do tipo "textarea" do HTML</li>
+                    <li><strong>editor:</strong> Campo para mostrar o CKEditor</li>
+                    <li><strong>cnpj:</strong> Campo de texto para entrada de CNPJ</li>
+                    <li><strong> selecao:</strong> Campo do tipo "select" do HTML, para as opções se usa o parâmetro
+                        <strong>opcao=""</strong> separando as opções por <strong>";"</strong>:
+                    </li>
+                    <br>
+                    <strong>Exemplo de campo do tipo selecao:</strong>
+                    <pre>
                                 <code>
 [@campo tipo="selecao" opcao="1;2;3;4" /]</code>
                             </pre>
-                        <li><strong> pessoa:</strong> Campo de seleção de pessoas cadastradas no sistema</li>
-                        <li><strong> lotacao:</strong> Campo de seleção de lotação cadastradas no sistema</li>
-                        <li><strong> cossignatario:</strong> Campo para seleção de cossignatário (será automaticamente incluído na lista de cossignatários do documento)</li>
-                        <li><strong> data:</strong> Campo de texto para entrada de data</li>
-                        <li><strong> hora:</strong> Campo de texto para entrada de hora</li>
-                        <li><strong> valor:</strong> Campo de texto para entrada de valor monetário</li>
-                        <li><strong> radio:</strong> Campo do tipo "radio" do HTML</li>
-                        <li><strong> checkbox:</strong> Campo do tipo "checkbox" do HTML</li>
-                    </ol>
-                </details>
-                Para a maior parte dos campos, funcionara da sequinte forma:
+                    <li><strong> pessoa:</strong> Campo de seleção de pessoas cadastradas no sistema</li>
+                    <li><strong> lotacao:</strong> Campo de seleção de lotação cadastradas no sistema</li>
+                    <li><strong> cossignatario:</strong> Campo para seleção de cossignatário (será automaticamente
+                        incluído na lista de cossignatários do documento)</li>
+                    <li><strong> data:</strong> Campo de texto para entrada de data</li>
+                    <li><strong> hora:</strong> Campo de texto para entrada de hora</li>
+                    <li><strong> valor:</strong> Campo de texto para entrada de valor monetário</li>
+                    <li><strong> radio:</strong> Campo do tipo "radio" do HTML</li>
+                    <li><strong> checkbox:</strong> Campo do tipo "checkbox" do HTML</li>
+                </ol>
+            </details>
+            Para a maior parte dos campos, funcionara da sequinte forma:
             </p>
             <strong>Exemplo de campo do tipo texto:</strong>
             <pre>
@@ -181,7 +217,8 @@
             </pre>
             <hr>
             <h2>Parâmetro (var)</h2>
-            <p>Esse parâmetro será a variável que guardará a informação passada no campo, Evite usar simbulos ou letras com acentos no nome.<br>
+            <p>Esse parâmetro será a variável que guardará a informação passada no campo, Evite usar simbulos ou letras
+                com acentos no nome.<br>
                 As variáveis criadas nos campos podem ser utilizadas para mostrar as informações recebidas no documento.
             </p>
             <strong>Exemplo de como usar o parâmetro var:</strong>
@@ -201,8 +238,10 @@
             </pre>
             <hr>
             <h2>Parâmetro (default)</h2>
-            <p>ele servirá para caso você precise adicionar um valor por padrão a um campo, por exemplo, se precisar que o campo já comece com o número 1, pode passa
-                o parâmetro da seguinte forma <strong>default="1"</strong>, para alguns campos o default precisa ser passado sem aspas.
+            <p>ele servirá para caso você precise adicionar um valor por padrão a um campo, por exemplo, se precisar que
+                o campo já comece com o número 1, pode passa
+                o parâmetro da seguinte forma <strong>default="1"</strong>, para alguns campos o default precisa ser
+                passado sem aspas.
             </p>
             <strong>Exemplo de como usar o parâmetro default:</strong>
             <pre>
@@ -214,20 +253,24 @@
             <hr>
             <h2>Parâmetro (obrigatorio)</h2>
             <p>ele funciona como uma abstração de um parâmetro HTML funcionando como <strong>required</strong>,
-                se caso o campo não for preenchido e o formulário finalizado o campo ficara com suas bordas vermelhas e aparecerá uma mensagem dizendo que ele é obrigatório
+                se caso o campo não for preenchido e o formulário finalizado o campo ficara com suas bordas vermelhas e
+                aparecerá uma mensagem dizendo que ele é obrigatório
             </p>
             <strong>Exemplo de como usar o parâmetro obrigatorio:</strong>
             <pre>
                 <code>
 [@campo titulo="digite um número" tipo="numero" var="numeroDigitado" default=1 <strong>obrigatorio="sim"</strong>/]</code>
             </pre>
-            <p>Esse parâmetro funciona de duas forma, podendo receber as strings <strong>"sim" ou "não"</strong> ou valores booleanos <strong>true ou false</strong>, 
+            <p>Esse parâmetro funciona de duas forma, podendo receber as strings <strong>"sim" ou "não"</strong> ou
+                valores booleanos <strong>true ou false</strong>,
                 isso dependerá do tipo de campo escolhido.
             </p>
             <hr>
             <h2>Parâmetro (maxcaracteres)</h2>
-            <p>Este é um limitador de caracteres, deixando com que o usuário não consiga digitar nada além do que foi definido, por exemplo, se você definir para que 
-                o campo receba somente 10 caracteres <strong>maxcaracteres="10"</strong> o usuário não conseguira digitar nada acima de 10 caracteres.
+            <p>Este é um limitador de caracteres, deixando com que o usuário não consiga digitar nada além do que foi
+                definido, por exemplo, se você definir para que
+                o campo receba somente 10 caracteres <strong>maxcaracteres="10"</strong> o usuário não conseguira
+                digitar nada acima de 10 caracteres.
             </p>
             <strong>Exemplo de como usar o parâmetro maxcaracteres:</strong>
             <pre>
@@ -236,8 +279,10 @@
             </pre>
             <hr>
             <h2>Parâmetro (reler)</h2>
-            <p>Esse parâmetro é realiza um reload da página para que um novo campo ou um novo dado seja mostrado ou inserido, por exemplo, se você quiser que uma informação
-                do backend seja exibida no front e ela não vier automaticamente, adicione um reler ao campo, que ao ser selecionado e perder o foco a página reinicia para
+            <p>Esse parâmetro é realiza um reload da página para que um novo campo ou um novo dado seja mostrado ou
+                inserido, por exemplo, se você quiser que uma informação
+                do backend seja exibida no front e ela não vier automaticamente, adicione um reler ao campo, que ao ser
+                selecionado e perder o foco a página reinicia para
                 exibir a nova informação.
             </p>
             <strong>Exemplo de como usar o parâmetro reler:</strong>
@@ -247,7 +292,8 @@
             </pre>
             <hr>
             <h2>Parâmetro (atts)</h2>
-            <p>diferente dos demais esse parâmetro funciona para adicionar parâmetros do html como "readonly, required e disabled", no seu formulário do siga, para usar 
+            <p>diferente dos demais esse parâmetro funciona para adicionar parâmetros do html como "readonly, required e
+                disabled", no seu formulário do siga, para usar
                 é muito simples:<br><br>
                 dentro do seu campo adicione: atts="{'required':'required'}"
             </p>
@@ -258,10 +304,10 @@
             </pre>
         </section>
 
-        <!-- Macro Entrevista -->
         <section id="api" class="content-section">
             <h1>Macro [@entrevista]</h1>
-            <p>Uma das macros mais importantes e mais utilizadas do sistema, sem ela não é possível criar novos formulários, é dentro do corpo dessa macro que ficara as macros do [@campo] vistos anteriormente,
+            <p>Uma das macros mais importantes e mais utilizadas do sistema, sem ela não é possível criar novos
+                formulários, é dentro do corpo dessa macro que ficara as macros do [@campo] vistos anteriormente,
                 param utilizar é muito simples:
             </p>
             <strong>Exemplo de como usar a macro [@entrevista]:</strong>
@@ -276,7 +322,8 @@
             </pre>
             <hr>
             <h2>Macro [@grupo]</h2>
-            <p>Essa macro é um ajuda na organização dos seus campos na macro [@entrevista], eles deixam todos os campos dentro do um único grupo contendo um titulo e separados por uma linha
+            <p>Essa macro é um ajuda na organização dos seus campos na macro [@entrevista], eles deixam todos os campos
+                dentro do um único grupo contendo um titulo e separados por uma linha
             </p>
             <strong>Exemplo de como usar a macro [@grupo]:</strong>
             <pre>
@@ -289,28 +336,197 @@
     [/@grupo]
 [/@entrevista]</code>
             </pre>
-            <Strong>A indentação não é necessária para o funcionamento das macros, mas é sempre bom manter tudo organizado!</Strong>
+            <Strong>A indentação não é necessária para o funcionamento das macros, mas é sempre bom manter tudo
+                organizado!</Strong>
         </section>
-        
-        <!-- Macro Documento -->
+
         <section id="contribuindo" class="content-section">
-            <h1>Macro [@documento]</h1>
-            <p>É aqui onde a mágica acontece e seu documento é preparado para ser exibido, no corpo dessa macro você utilizara HTML5, CSS3 e FreeMarker puros, 
-                dentro dessa macro você irá formatar os textos, decidir a fonte do documento, criar e organizar tabelas estáticas, modular a forma como o documento
-                será exibido na sua forma final, aqui você podera utilizar variaveis criadas nos campos e também variaveis que vem do backend, nesse tópico vou te
-                explicar tudo sobre essa macro e como utilizar as variaveis dentro do modelo.  
+            <h1>Como usar HTML5 no formulário</h1>
+            <p>Primeiramente vou explicar o por que de usar código HTML junto as macros FreeMarker na macro de
+                entrevista,
+                por padrão o siga deixa todos os campos do mesmo tamanho e um a baixo do outro, mas vamos supor que por
+                uma questão de design ou
+                para melhorar a forma como o formulário é preenchido você queria colocar um campo a frente do outro,
+                para que isso seja possível,
+                você pode usar código HTML, existem duas forma de se fazer isso no siga, por conta do seu layout ser
+                feito com BootStrap
+                é possível usar HTML puro ou BootStrap, veja os exemplos a baixo de como deve ser feito.
             </p>
-            <strong>Exemplo de como usar a macro [@documento]:</strong>
-            <br>
+            <h3>Usando HTML5 puro:</h3>
             <pre>
                 <code>
-[@documento]
-[/@documento]</code>
+[@entrevista]
+   [@grupo]
+      &ltdiv style="display: inline-flex; gap: 10px;"&gt
+         [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+      &lt/div&gt
+   [/@grupo]
+[/@entrvista]</code>
             </pre>
+            <p>
+                Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
+                caso você queira que um campo em expecífico seja maior ou menos que os demais, basta criar uma
+                <strong>&ltdiv&gt&lt/div&gt</strong>
+                entre o campo e adicionar o parâmetro <strong>style="width:;"</strong> e adicionar o tamanho que deseja.
+            </p>
+            <pre>
+                <code>
+[@entrevista]
+   [@grupo]
+      &ltdiv style="display: inline-flex; gap: 10px;"&gt
+         &ltdiv style="width: 400px;"&gt 
+            [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+         &lt/div&gt
+         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+      &lt/div&gt
+   [/@grupo]
+[/@entrvista]</code>
+            </pre>
+            <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
             <hr>
+            <h3>Usando HTML5 com BootStrap:</h3>
+            <p>Para exemplificar o BootStrap vou usar os mesmos exemplos acima mas com parâmetros do BootStrap:</p>
+            <pre>
+                <code>
+[@entrevista]
+   [@grupo]
+      &ltdiv class="d-inline-flex gap-3"&gt
+         [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /] 
+         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+      &lt/div&gt
+   [/@grupo]
+[/@entrvista]</code>
+            </pre>
+            <p>
+                Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
+                caso você queira que um campo em expecífico seja maior ou menos que os demais, basta criar uma
+                <strong>&ltdiv&gt&lt/div&gt</strong>
+                entre o campo e adicionar o parâmetro <strong>class="w-50 p-3"</strong>, Por conta de limitações de
+                tamanho do BootStrap,
+                Deixei o campo com 50% do tamanho total da página, mas segundo a documentação do BootStrap é possível
+                deixar com
+                25, 50, 75 e 100% do total da página, mudando o número após o w pelo tamanho desejado.
+            </p>
+            <pre>
+                <code>
+[@entrevista]
+   [@grupo]
+      &ltdiv class="d-inline-flex gap-3"&gt
+         &ltdiv class="w-50 p-3"&gt 
+            [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+         &lt/div&gt
+         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+      &lt/div&gt
+   [/@grupo]
+[/@entrvista]
+                </code>
+            </pre>
+            <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
+        </section>
+
+        <section id="FreeMarkerForm" class="content-section">
+            <h1>Como usar FreeMarker no Formulário</h1>
+            <p>Nesse Tópico vou abordar como se usa o FreeMarker no formulário, permitindo criar campos de forma
+                dinâmica
+                adicionando ou removendo eles, integração com API, calculos e condições.
+            </p>
+            <hr>
+            <h3>Condições IF, ELSE IF e ELSE</h3>
+            <p>
+                No FreeMarker as condições funcionam como em qualquer outra linguagem, se quer que algo seja mostrado
+                somente após um valor específico ser inserido, basta adicionar uma condição para isso,
+                gerando um caminho bloqueado ou aberto para o que deseja realizar.
+            </p>
+            <h3>Exemplo de [#if]:</h3>
+            <pre><code>[@entrevista]
+[@selecao opcoes="Selecione;Sim;Não" var="OpcaoSelecionada" titulo="Deseja mostrar a mensagem?" reler=true/]
+[#if OpcaoSelecionada == "Sim"]
+    &ltp style="color: orangered;"&gtMensagem de texto ao usuário&lt/p&gt
+[/#if]
+[/@entrevista]</code></pre>
+        <p>Para usar as demais estruturas o conceito é o mesmo, mas somente o [#if] deve ser fechado com [/#if]
+            os demais ficaram dependentes da estrutura if, por exemplo:
+            <pre><code>[#if Condição]
+[#else if Condição]
+[#else]
+[/#if]</code></pre>
+
+            Perceba que o if foi aberto e fechado e as demaiws estruturas ficaram dentro do seu "corpo".
+            <h3>Exemplo de utilização do [#elseif] e [#else]:</h3>
+            <pre><code>[@entrevista]
+   [@selecao opcoes="Selecione;Sim;Não" var="OpcaoSelecionada" titulo="Deseja mostrar a mensagem?" reler=true/]
+   [#if OpcaoSelecionada == "Sim"]
+      &ltp style="color: orangered;"&gtMensagem ou campo aparece&lt/p&gt
+   [#elseif OpcaoSelecionada == "Não"]
+   	&ltp style="color: blue;"&gtOutra mensagem ou campo aparece&lt/p&gt
+   [#else]
+      &ltp style="color: green;"&gtMensagem ou campo diferente&lt/p&gt
+   [/#if]
+[/@entrevista]</code></pre>
+        </p>
+            <hr>
+            <h3>Usando o list (Estrutura equivalente ao for)</h3>
+            <p>
+                Dentro do Freemarker existe a estrutura <strong>list</strong> permitindo iterar dados, para usar é muito
+                simples
+                diferente das macros criadas no Siga-Doc as macros do FreeMarker usam <strong>#</strong> no começo,
+                por exemplo: <strong>[#list]</strong> sendo fechado por um <strong>[/#list]</strong>.
+                <br><br>
+                Com os formulários a principal utilização do <strong>list</strong> é criar campos dinâmicamente iterando
+                um valor numérico,
+                Por exemplo, vamos supor que o usuário precisa adicionar vários campos de busca de pessoa no sistema o
+                campo [@pessoa],
+                para isso ela passa o valor de pessoa que deseja, por exemplo, 5 campos do tipo pessoa, apartir desse
+                valor sugirá cinco campos de pesquisa de pessoa.
+            </p>
+            <h3>Código de Exemplo:</h3>
+            <pre><code>[@entrevista]
+   [@grupo titulo="Pesquisar Pessoa"]
+      [@campo tipo="numero" titulo="Quantas pessoas quer pesquisar?" var="QuantiPessoas" default="0" reler=true/]
+      [#if QuantiPessoas??]
+        [#list 1..(QuantiPessoas)?number as i] 
+          [@pessoa titulo="${i}ºPessoa" var="Pessoa${i}"/]
+        [/#list]
+      [/#if]
+   [/@grupo]
+[/@entrevista]</code></pre>
+            <p>A função <strong>?number</strong> é utilizada para mostrar ao list que aquela variável é numérica.
+                <br><br>
+                Neste exemplo a estrutura <strong>list</strong> contará de 1 o exato número digitado.
+            </p>
+            <hr>
+            <h3>Criação de variável:</h3>
+            <p>Dentro do FreeMarker é possível criar variáveis, são variáveis simples sem tipagem mas com grande utilização,
+                para isso basta adicionar <br><strong>[#assign Nome = "SigaSorriso"]</strong>, se você quiser adicionar uma String,
+                basta colocar o texto dentro do aspas, se for um número basta digitar o número sem aspas, para utilizar a variável
+                adicione ela mo meio de duas chaves com um sinal de sifrão no antes, dessa forma: <strong>${Nome}</strong>.<br><br>
+                Assim será possível visualizar a informação contente na variável.
+            </p>
+
+                       <pre><code>[@entrevista]
+    [#assign Nome = "SigaSorriso"]
+    ${SigaSorriso}
+[/@entrevista]</code></pre>
+            <hr>
+
+            <p>De forma básica são essas as estruturas mais utilizadas dentro da macro de entrevistas, caso queira se aprofundar mais,
+                sobre o Freemarker, basta <a target="_blank" href="https://freemarker.apache.org/index.html" style="text-decoration: nome;
+                color: black;">clicar aqui</a>
+            </p>
+        </section>
+
+        <section id="macros02" class="content-section">
+            <h1>Macros 02</h1>
+            <p>Conteúdo sobre outras macros...</p>
         </section>
     </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
