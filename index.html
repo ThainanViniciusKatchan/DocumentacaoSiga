@@ -68,7 +68,7 @@
             <p>O FreeMarker é um motor de templates em Java para gerar qualquer tipo de texto de saída (como páginas
                 HTML, e-mails e arquivos de configuração)
                 a partir de modelos escritos na FreeMarker Template Language (FTL) e dados variáveis. Sua principal
-                utilidade é separar a lógica de apresentação ]
+                utilidade é separar a lógica de apresentação
                 da camada de lógica de negócio, permitindo a criação de conteúdo dinâmico de forma eficiente e
                 organizada:
                 <a target="_blank" href="https://freemarker.apache.org/index.html">Saiba Mais</a>
@@ -432,8 +432,10 @@
         <section id="FreeMarkerForm" class="content-section">
             <h1>Como usar FreeMarker no Formulário</h1>
             <p>Nesse Tópico vou abordar como se usa o FreeMarker no formulário, permitindo criar campos de forma
-                dinâmica
-                adicionando ou removendo eles, integração com API, calculos e condições.
+                dinâmica adicionando ou removendo eles, calculos e condições, Diferente das macros
+                do Siga-Doc as estruturas do Freemarker usam um <strong>#</strong> para serem reconhecidas, sendo Assim
+                para usar elas basta adicionar, por exemplo, <strong>[#Estrutura]</strong> fechando da seguinte forma
+                <strong>[/#Estrutura]</strong>.
             </p>
             <hr>
             <h3>Condições IF, ELSE IF e ELSE</h3>
@@ -473,9 +475,7 @@
             <h3>Usando o list (Estrutura equivalente ao for)</h3>
             <p>
                 Dentro do Freemarker existe a estrutura <strong>list</strong> permitindo iterar dados, para usar é muito
-                simples
-                diferente das macros criadas no Siga-Doc as macros do FreeMarker usam <strong>#</strong> no começo,
-                por exemplo: <strong>[#list]</strong> sendo fechado por um <strong>[/#list]</strong>.
+                simples, por exemplo: <strong>[#list]</strong> sendo fechado por um <strong>[/#list]</strong>.
                 <br><br>
                 Com os formulários a principal utilização do <strong>list</strong> é criar campos dinâmicamente iterando
                 um valor numérico,
@@ -500,6 +500,7 @@
                 Neste exemplo a estrutura <strong>list</strong> contará de 1 o exato número digitado.
             </p>
             <hr>
+            
             <h3>Criação de variável:</h3>
             <p>Dentro do FreeMarker é possível criar variáveis, são variáveis simples sem tipagem mas com grande utilização,
                 para isso basta adicionar <br><strong>[#assign Nome = "SigaSorriso"]</strong>, se você quiser adicionar uma String,
@@ -513,7 +514,63 @@
     ${SigaSorriso}
 [/@entrevista]</code></pre>
             <hr>
-
+            <h3>Calculos com FreeMarker</h3>
+            <p>
+                Para realizar calculos no FreeMarker você precisa criar uma variável que receba o valor final, usar os
+                operadores básicos <strong>+, -, /,*.</strong>, e obviamente os valores para calcular.
+            </p>
+            <h3>Exemplo de calculo:</h3>
+            <pre><code>[#assign variavel = 200 + 1]
+[#assign variavel = 200 - 1]
+[#assign variavel = 200 / 1]
+[#assign variavel = 200 * 2]</code></pre>
+            <p>Para realizar Calculo Com variáveis criadas em campos, você terá que fazer uma valição da existencia
+                dessas variáveis, neste exemplo adicionei um valor padrão com o Parâmetro <strong>default=0</strong>
+                para evitar erro de variável null, outra forma de se fazer isso seria adicionando o a função 
+                <strong>?has_content</strong> a condição, neste caso o calculo só iria ocorrer após os dois 
+                valores serem preenchidos, segue abaixo os exemplos de código:
+            </p>
+            <h3>Exemplo com default:</h3>
+            <pre><code>[@entrevista]
+  [@numero var="N1" titulo="1º Número" reler="sim" default=0 /]
+  [@numero var="N2" titulo="2º Número" reler="sim" default=0/]
+  [#if N1?? && N2??]
+    [#assign Valor = (N1?number) + (N2?number)]
+    ${Valor!}
+  [/#if]
+[/@entrevista]</pre></code>
+            <p>Perceba que mesmo não utilizando a função <strong>?has_content</strong> preciso validar a existência
+                das variáveis, adicionando <strong>??</strong> a frente da variável, além disso para que o calculo seja feito
+                preciso dizer ao Freemarker que nossa variável é númerica, adicionando as variáveis entre parênteses e a função
+                <strong>?number</strong> durante o calculo Essa função pode ser usada dentro de <strong>[#if]</strong> também,
+                caso a validação dependa de um número.
+            </p>
+            <h3>Exemplo com ?has_content:</h3>
+                        <pre><code>[@entrevista]
+  [@numero var="N1" titulo="1º Número" reler="sim" /]
+  [@numero var="N2" titulo="2º Número" reler="sim" /]
+  [#if N1?has_content && N2?has_content]
+    [#assign Valor = (N1?number) + (N2?number)]
+    ${Valor!}
+  [/#if]
+[/@entrevista]</pre></code>
+            <p>Agora quando utilizo o <strong>?has_content</strong>, se o valor da variável permanecer vázio, ele não será passado ao Calculo
+                evitando assim erros de valor nulo.<br><br>
+                E se eu não dizer ao FreeMarker que vamos calcular um número o que acontece?<br>
+                Bem, caso isso não ocora, você ira concatenar os valores colocando um a frente do outro, dessa forma,
+                <strong>30 + 20</strong> se torna <strong>3020</strong> e não <strong>50 </strong> já que o valor não 
+                foi calculado e sim concatenado.
+            </p>
+            <h3>Exemplo de Concatenação</h3>
+            <pre><code>[@entrevista]
+  [@numero var="N1" titulo="1º Número" reler="sim" /]
+  [@numero var="N2" titulo="2º Número" reler="sim" /]
+  [#if N1?has_content && N2?has_content]
+    [#assign Valor = (N1) + (N2)]
+    ${Valor!}
+  [/#if]
+[/@entrevista]</pre></code>
+            <hr>
             <p>De forma básica são essas as estruturas mais utilizadas dentro da macro de entrevistas, caso queira se aprofundar mais,
                 sobre o Freemarker, basta <a target="_blank" href="https://freemarker.apache.org/index.html" style="text-decoration: nome;
                 color: black;">clicar aqui</a>
