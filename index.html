@@ -42,7 +42,8 @@
                         <li><a href="#FreeMarkerForm" class="nav-link">Usando freemarker no formulário</a></li>
                     </ul>
                 </li>
-                <li><a href="#macros02" class="nav-link">Macros02</a></li>
+                <li><a href="#Variaveis" class="nav-link">Variáveis</a></li>
+                <li><a href="#Documento" class="nav-link">Documento</a></li>
             </ul>
         </nav>
     </aside>
@@ -78,8 +79,9 @@
             <p>Antes de começar, certifique-se de que você tem:</p>
             <ul>
                 <li>Conhecimento Básico de lógica de programação</li>
-                <li>Java 8 ></li>
+                <li>Java 8</li>
                 <li>Conhecimento básico de HTML5 e CSS3</li>
+                <li>Estar com o sistema SigaDoc (v11.5.101-6407ed1) ou superior, funcionando localmente ou em servidor</li>
             </ul>
         </section>
 
@@ -162,8 +164,8 @@
                 campos compartilham parâmetros entre eles os quais são:
                 </br></br>
             <details>
-                <summary class="DropTextclick">Parâmetros</summary>
-                <div style="margin-left: 8px;">
+                <summary class="DropTextclick ">Parâmetros</summary>
+                <div style="margin-left: 8px;" class="dropdown-menu">
                     <strong>tipo=""</strong></br>
                     <strong>var=""</strong></br>
                     <strong>titulo=""</strong></br>
@@ -284,12 +286,19 @@
                 do backend seja exibida no front e ela não vier automaticamente, adicione um reler ao campo, que ao ser
                 selecionado e perder o foco a página reinicia para
                 exibir a nova informação.
+                <br><br>
+                Para que ele funcione, você precisa para para ele um valor que pode ser Booleano ou String, depende do campo que for utilizado,
+                no campo de texto o valor passodo é <strong>true</strong> no campo de numero o valor é <strong>sim</strong>
             </p>
             <strong>Exemplo de como usar o parâmetro reler:</strong>
             <pre>
                 <code>
-[@campo titulo="digite um número" tipo="numero" var="numeroDigitado" default=${data_hora} obrigatorio="sim" maxcaracteres="10" <strong>reler=true</strong>/]</code>
+[@campo titulo="digite um número" tipo="numero" var="numeroDigitado" obrigatorio="sim" maxcaracteres="10" <strong>reler="sim"</strong>/]<br>
+[@campo titulo="digite seu nome" tipo="texto" var="NomePessoa" obrigatorio="sim" <strong>reler=true</strong>/]</code>
             </pre>
+            <p style="text-indent: 1.5cm;"> <strong>Dica: </strong> Use o reler=true com moderação. Em formulários muito grandes, recarregar a página com frequência
+                pode atrapalhar a experiência do usuário.
+            </p>
             <hr>
             <h2>Parâmetro (atts)</h2>
             <p>diferente dos demais esse parâmetro funciona para adicionar parâmetros do html como "readonly, required e
@@ -302,6 +311,26 @@
                 <code>
 [@campo titulo="Nome do usuário" tipo="texto" var="Nome" default="Thainan Vinicius Katchan" <strong>atts="{'disabled':'disabled'}"</strong> /]</code>
             </pre>
+            <hr>
+            <H4 class="Avancado">Tópico Avançado</H4>
+            <h2>Parâmetro (idAjax)</h2>
+            <p>Para usar o Ajax dentro dos formulários é simples e fácil, mas para essa parte você precisara ter entendido
+                o funcionamento dos <strong><a href="#api" class="texto-link">[@grupo]</a></strong>, além disso será de extrema importância
+                o conhecimento prévio do funcionamento das condições <strong><a href="#FreeMarkerForm" class="texto-link">[#if]</a></strong>,
+                o ajax é utilizado para que a página não precise ser atualizada para que um novo campo ou informação apareçam 
+                ,a melhor utilização do idAjax é com o campo <strong>[@selecao]</strong>.
+            </p>
+            <strong>Exemplo de como usar o idAjax:</strong>
+            <pre><code>[@entrevista]
+	[@selecao titulo="Tipo de campo" var="TipoDado" idAjax="TipoDadoAjax" reler=true opcoes="Selecione;Número;Texto"/]
+    [@grupo depende="TipoDadoAjax"]
+    	[#if TipoDado == "Número"]
+    		[@numero titulo="Digite um número" var="Numero" /]
+        [#elseif TipoDado == "Texto"]
+        	[@texto titulo="Digite um texto" var="Texto" /]
+        [/#if]
+    [/@grupo]
+[/@entrevista]</code></pre>
         </section>
 
         <section id="api" class="content-section">
@@ -363,7 +392,7 @@
          [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
       &lt/div&gt
    [/@grupo]
-[/@entrvista]</code>
+[/@entrevista]</code>
             </pre>
             <p>
                 Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
@@ -383,7 +412,7 @@
          [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
       &lt/div&gt
    [/@grupo]
-[/@entrvista]</code>
+[/@entrevista]</code>
             </pre>
             <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
             <hr>
@@ -399,7 +428,7 @@
          [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
       &lt/div&gt
    [/@grupo]
-[/@entrvista]</code>
+[/@entrevista]</code>
             </pre>
             <p>
                 Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
@@ -423,7 +452,7 @@
          [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
       &lt/div&gt
    [/@grupo]
-[/@entrvista]
+[/@entrevista]
                 </code>
             </pre>
             <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
@@ -577,9 +606,40 @@
             </p>
         </section>
 
-        <section id="macros02" class="content-section">
-            <h1>Macros 02</h1>
-            <p>Conteúdo sobre outras macros...</p>
+        <section id="Variaveis">
+            <h1>Variáveis dentro do FreeMarker</h1>
+            <p>Primeiramente vamos entender como utilizar variáveis criadas nos campos do <strong>[@entrevista]</strong>, como visto anteriormente para utilizar
+                uma variável criada no formulário basta utilizar <strong>${NomeDaVariavel}</strong>.
+            </p>
+            <hr>
+            <h3>Evitando Erro de valor nulo</h3>
+            <p>
+                Para evitar erros de valor nulo, é recomendado
+                adicoinar <strong>!</strong> logo a frente do nome da variável, assim ela recebe um valor vazio evitando assim o erro de valor nulo,
+                <strong>${NomeDaVariavel!}</strong>
+            </p>
+            <pre><code>${NomeDaVariavel!}</code></pre>
+        </section>
+
+        <section id="Documento" class="content-section">
+            <h1>Documento</h1>
+            <p>A parte de documento é onde a mágica acontece, até o momento criamos somente formulários estáticos e dinâmicos
+                mas agora, vamos mostrar as informações obtidas atravez do formulário em um documento criado com HTML e FreeMarker,
+                para a elaboração dos documentos não necessário começar um HTML do zero, pois as tags <strong>&lthtml&gt, &ltbody&gt e &lthead&gt</strong>
+                já estão presentes de forma oculta no sistema, dessa forma, basta somente utilizar as tags de conteúdo e personalização.
+                <br><br>
+                O siga entende praticamente todas as tags do HTML dentro do documento, mas com CSS o assunto é outro, nem todos os parâmetgros são aceitos
+                podendo muitas vezes ser completamente ignorado, na maioria dos casos o sistema ignora ajustes de margem em conteúdos quwe veem por padrão no sistema,
+                como o tipo do documento.
+            </p>
+            <h2>Como usar a macro [@documento]</h2>
+            <p>
+                Dentro desta parte vou abordar praticamente todas as possíbilidades de utilização do Freemarker com HTML
+                no <strong>[@documento]</strong>.<br><br>
+            </p>
+            <pre><code>
+                
+            </code></pre>
         </section>
     </main>
 
