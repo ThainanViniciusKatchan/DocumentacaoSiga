@@ -1,89 +1,83 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section');
-    const menuToggle = document.getElementById('menu-toggle');
+document.addEventListener('DOMContentLoaded', function () {
+    const mainContent = document.querySelector('.main-content');
+    const docNav = document.getElementById('doc-nav');
     const sidebar = document.getElementById('sidebar');
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
 
-    // Função para mostrar a seção correta e atualizar o link ativo
-    function showSection(hash) {
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Se não tiver hash, usa o da primeira seção
-        if (!hash) {
-            hash = '#introducao';
-            window.scrollTo(0, 0); 
+    // Função para carregar conteúdo. Não precisa mudar.
+    async function loadContent(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Arquivo não encontrado: ${url}`);
+            mainContent.innerHTML = await response.text();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+            console.error("Erro ao carregar:", error);
+            mainContent.innerHTML = `<h1>Página não encontrada</h1>`;
         }
+    }
 
-        sections.forEach(section => {
-            if ('#' + section.id === hash) {
-                section.classList.add('active');
-            } else {
-                section.classList.remove('active');
-            }
-        });
-
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === hash) {
+    // Função para atualizar o link ativo. Não precisa mudar.
+    function updateActiveLink(url) {
+        document.querySelectorAll('.nav-link').forEach(link => {
+            // Com a tag <base>, podemos comparar os hrefs diretamente
+            if (link.getAttribute('href') === url) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
             }
         });
-
-        // Fecha o menu em telas pequenas após clicar em um link
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('open');
-        }
     }
-    
-    // Navegação via cliques nos links do menu principal
-    const docNav = document.getElementById('doc-nav');
+
+    // Função do dropdown. Não precisa mudar.
+    function handleDropdown(toggleLink) {
+        const parentLi = toggleLink.parentElement;
+        const dropdownMenu = parentLi.querySelector('.dropdown-menu');
+        parentLi.classList.toggle('open');
+        dropdownMenu.style.maxHeight = parentLi.classList.contains('open') ? dropdownMenu.scrollHeight + "px" : null;
+    }
+
+    // Listener principal da navegação
     if (docNav) {
-        docNav.addEventListener('click', function(event) {
+        docNav.addEventListener('click', function (event) {
             const targetLink = event.target.closest('a');
-            if (targetLink && !targetLink.classList.contains('dropdown-toggle')) {
-                event.preventDefault();
-                const hash = targetLink.getAttribute('href');
-                history.pushState(null, null, hash); // Atualiza a URL sem recarregar
-                showSection(hash);
-            }
-        });
-    }
-    
-    // -- LÓGICA PARA O NOVO DROPDOWN --
-    dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function(event) {
-            event.preventDefault(); // Impede a navegação padrão do link
-            const parentLi = this.parentElement;
-            const dropdownMenu = parentLi.querySelector('.dropdown-menu');
+            if (!targetLink) return;
 
-            parentLi.classList.toggle('open');
-            
-            if (parentLi.classList.contains('open')) {
-                // Define a altura máxima para o menu aparecer
-                dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + "px";
+            event.preventDefault();
+            const url = targetLink.getAttribute('href');
+
+            if (targetLink.classList.contains('dropdown-toggle')) {
+                handleDropdown(targetLink);
             } else {
-                // Reseta a altura máxima para o menu sumir
-                dropdownMenu.style.maxHeight = null;
+                loadContent(url);
+                updateActiveLink(url);
+                // A URL agora é relativa à base, então não vai duplicar
+                history.pushState({ path: url }, '', url);
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }
             }
-
-            // Opcional: navegar para a primeira seção do dropdown ao abrir
-            const firstLinkHash = this.getAttribute('href');
-            showSection(firstLinkHash);
-            history.pushState(null, null, firstLinkHash);
-        });
-    });
-
-
-    // Exibe a seção correta ao carregar a página (baseado na URL)
-    showSection(window.location.hash);
-    
-    // Controle do menu em telas pequenas
-    if(menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('open');
         });
     }
+
+    // Listener do menu mobile
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    }
+
+    // Função de carregamento inicial
+    function loadInitialPage() {
+        // Tenta carregar a página da URL atual, ou vai para a página padrão
+        let initialUrl = window.location.pathname.substring(1); // remove a primeira barra "/"
+        if (initialUrl === '' || initialUrl === 'index.html') {
+            const firstLink = document.querySelector('.nav-link:not(.dropdown-toggle)');
+            initialUrl = firstLink ? firstLink.getAttribute('href') : 'sections/introduction.html';
+        }
+        
+        loadContent(initialUrl);
+        updateActiveLink(initialUrl);
+        history.replaceState({ path: initialUrl }, '', initialUrl);
+    }
+    
+    loadInitialPage();
 });
