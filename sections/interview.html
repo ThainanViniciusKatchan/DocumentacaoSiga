@@ -1,36 +1,46 @@
-<section id="api" class="content-section">
-    <h1>Macro [@entrevista]</h1>
-    <p>Uma das macros mais importantes e mais utilizadas do sistema, sem ela não é possível criar novos
-        formulários, é dentro do corpo dessa macro que ficara as macros do [@campo] vistos anteriormente,
-        param utilizar é muito simples:
-    </p>
-    <strong>Exemplo de como usar a macro [@entrevista]:</strong>
-    <br>
-    <pre>
-                <code>
-[@entrevista]
-    [@campo tipo="texto" var="campoTexto" titulo="Campo de texto"  obrigatorio="sim"/]
-    [@campo tipo="numero" var="campoNumero" titulo="Campo de Número"  obrigatorio="sim"/]
-    [@campo tipo="cpf" var="campoCPF" titulo="Campo de CPF"  obrigatorio="sim"/]
-[/@entrevista]</code>
-            </pre>
-    <hr>
-    <h2>Macro [@grupo]</h2>
-    <p>Essa macro é um ajuda na organização dos seus campos na macro [@entrevista], eles deixam todos os campos
-        dentro do um único grupo contendo um titulo e separados por uma linha
-    </p>
-    <strong>Exemplo de como usar a macro [@grupo]:</strong>
-    <pre>
-                <code>
-[@entrevista]
-    [@grupo titulo="Grupo de campos"]
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro Entrevista e Grupo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <section id="api" class="content-section">
+        <h1>Macro [@entrevista]</h1>
+        <p>Uma das macros mais importantes e mais utilizadas do sistema, sem ela não é possível criar novos
+            formulários, é dentro do corpo dessa macro que ficara as macros do [@campo] vistos anteriormente,
+            param utilizar é muito simples:
+        </p>
+        <strong>Exemplo de como usar a macro [@entrevista]:</strong>
+        <br>
+        <pre>
+                    <code>
+    [@entrevista]
         [@campo tipo="texto" var="campoTexto" titulo="Campo de texto"  obrigatorio="sim"/]
         [@campo tipo="numero" var="campoNumero" titulo="Campo de Número"  obrigatorio="sim"/]
         [@campo tipo="cpf" var="campoCPF" titulo="Campo de CPF"  obrigatorio="sim"/]
-    [/@grupo]
-[/@entrevista]</code>
-            </pre>
-    <Strong>A indentação não é necessária para o funcionamento das macros, mas é sempre bom manter tudo
-        organizado!</Strong>
-</section>
-
+    [/@entrevista]</code>
+                </pre>
+        <hr>
+        <h2>Macro [@grupo]</h2>
+        <p>Essa macro é um ajuda na organização dos seus campos na macro [@entrevista], eles deixam todos os campos
+            dentro do um único grupo contendo um titulo e separados por uma linha
+        </p>
+        <strong>Exemplo de como usar a macro [@grupo]:</strong>
+        <pre>
+                    <code>
+    [@entrevista]
+        [@grupo titulo="Grupo de campos"]
+            [@campo tipo="texto" var="campoTexto" titulo="Campo de texto"  obrigatorio="sim"/]
+            [@campo tipo="numero" var="campoNumero" titulo="Campo de Número"  obrigatorio="sim"/]
+            [@campo tipo="cpf" var="campoCPF" titulo="Campo de CPF"  obrigatorio="sim"/]
+        [/@grupo]
+    [/@entrevista]</code>
+                </pre>
+        <Strong>A indentação não é necessária para o funcionamento das macros, mas é sempre bom manter tudo
+            organizado!</Strong>
+    </section>
+</body>
+</html>

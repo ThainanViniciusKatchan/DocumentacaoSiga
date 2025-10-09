@@ -1,88 +1,99 @@
-<section id="contribuindo" class="content-section">
-    <h1>Como usar HTML5 no formulário</h1>
-    <p>Primeiramente vou explicar o por que de usar código HTML junto as macros FreeMarker na macro de
-        entrevista,
-        por padrão o siga deixa todos os campos do mesmo tamanho e um a baixo do outro, mas vamos supor que por
-        uma questão de design ou
-        para melhorar a forma como o formulário é preenchido você queria colocar um campo a frente do outro,
-        para que isso seja possível,
-        você pode usar código HTML, existem duas forma de se fazer isso no siga, por conta do seu layout ser
-        feito com BootStrap
-        é possível usar HTML puro ou BootStrap, veja os exemplos a baixo de como deve ser feito.
-    </p>
-    <h3>Usando HTML5 puro:</h3>
-    <pre>
-                <code>
-[@entrevista]
-   [@grupo]
-      &ltdiv style="display: inline-flex; gap: 10px;"&gt
-         [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
-         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
-         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
-      &lt/div&gt
-   [/@grupo]
-[/@entrevista]</code>
-            </pre>
-    <p>
-        Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
-        caso você queira que um campo em expecífico seja maior ou menos que os demais, basta criar uma
-        <strong>&ltdiv&gt&lt/div&gt</strong>
-        entre o campo e adicionar o parâmetro <strong>style="width:;"</strong> e adicionar o tamanho que deseja.
-    </p>
-    <pre>
-                <code>
-[@entrevista]
-   [@grupo]
-      &ltdiv style="display: inline-flex; gap: 10px;"&gt
-         &ltdiv style="width: 400px;"&gt 
-            [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
-         &lt/div&gt
-         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
-         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
-      &lt/div&gt
-   [/@grupo]
-[/@entrevista]</code>
-            </pre>
-    <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
-    <hr>
-    <h3>Usando HTML5 com BootStrap:</h3>
-    <p>Para exemplificar o BootStrap vou usar os mesmos exemplos acima mas com parâmetros do BootStrap:</p>
-    <pre>
-                <code>
-[@entrevista]
-   [@grupo]
-      &ltdiv class="d-inline-flex gap-3"&gt
-         [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
-         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /] 
-         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
-      &lt/div&gt
-   [/@grupo]
-[/@entrevista]</code>
-            </pre>
-    <p>
-        Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
-        caso você queira que um campo em expecífico seja maior ou menos que os demais, basta criar uma
-        <strong>&ltdiv&gt&lt/div&gt</strong>
-        entre o campo e adicionar o parâmetro <strong>class="w-50 p-3"</strong>, Por conta de limitações de
-        tamanho do BootStrap,
-        Deixei o campo com 50% do tamanho total da página, mas segundo a documentação do BootStrap é possível
-        deixar com
-        25, 50, 75 e 100% do total da página, mudando o número após o w pelo tamanho desejado.
-    </p>
-    <pre>
-                <code>
-[@entrevista]
-   [@grupo]
-      &ltdiv class="d-inline-flex gap-3"&gt
-         &ltdiv class="w-50 p-3"&gt 
-            [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
-         &lt/div&gt
-         [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
-         [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
-      &lt/div&gt
-   [/@grupo]
-[/@entrevista]
-                </code>
-            </pre>
-    <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
-</section>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando HTML5 no Formulário</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <section id="contribuindo" class="content-section">
+        <h1>Como usar HTML5 no formulário</h1>
+        <p>Primeiramente vou explicar o por que de usar código HTML junto as macros FreeMarker na macro de
+            entrevista,
+            por padrão o siga deixa todos os campos do mesmo tamanho e um a baixo do outro, mas vamos supor que por
+            uma questão de design ou
+            para melhorar a forma como o formulário é preenchido você queria colocar um campo a frente do outro,
+            para que isso seja possível,
+            você pode usar código HTML, existem duas forma de se fazer isso no siga, por conta do seu layout ser
+            feito com BootStrap
+            é possível usar HTML puro ou BootStrap, veja os exemplos a baixo de como deve ser feito.
+        </p>
+        <h3>Usando HTML5 puro:</h3>
+        <pre>
+                    <code>
+    [@entrevista]
+       [@grupo]
+          &ltdiv style="display: inline-flex; gap: 10px;"&gt
+             [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+             [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+             [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+          &lt/div&gt
+       [/@grupo]
+    [/@entrevista]</code>
+                </pre>
+        <p>
+            Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
+            caso você queira que um campo em expecífico seja maior ou menos que os demais, basta criar uma
+            <strong>&ltdiv&gt&lt/div&gt</strong>
+            entre o campo e adicionar o parâmetro <strong>style="width:;"</strong> e adicionar o tamanho que deseja.
+        </p>
+        <pre>
+                    <code>
+    [@entrevista]
+       [@grupo]
+          &ltdiv style="display: inline-flex; gap: 10px;"&gt
+             &ltdiv style="width: 400px;"&gt
+                [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+             &lt/div&gt
+             [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+             [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+          &lt/div&gt
+       [/@grupo]
+    [/@entrevista]</code>
+                </pre>
+        <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
+        <hr>
+        <h3>Usando HTML5 com BootStrap:</h3>
+        <p>Para exemplificar o BootStrap vou usar os mesmos exemplos acima mas com parâmetros do BootStrap:</p>
+        <pre>
+                    <code>
+    [@entrevista]
+       [@grupo]
+          &ltdiv class="d-inline-flex gap-3"&gt
+             [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+             [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+             [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+          &lt/div&gt
+       [/@grupo]
+    [/@entrevista]</code>
+                </pre>
+        <p>
+            Dessa forma os campos aparecerão um ao lado do outro com uma margem de 10px de distância um do outro,
+            caso você queira que um campo em expecífico seja maior ou menos que os demais, basta criar uma
+            <strong>&ltdiv&gt&lt/div&gt</strong>
+            entre o campo e adicionar o parâmetro <strong>class="w-50 p-3"</strong>, Por conta de limitações de
+            tamanho do BootStrap,
+            Deixei o campo com 50% do tamanho total da página, mas segundo a documentação do BootStrap é possível
+            deixar com
+            25, 50, 75 e 100% do total da página, mudando o número após o w pelo tamanho desejado.
+        </p>
+        <pre>
+                    <code>
+    [@entrevista]
+       [@grupo]
+          &ltdiv class="d-inline-flex gap-3"&gt
+             &ltdiv class="w-50 p-3"&gt
+                [@campo tipo="texto" titulo="Seu Nome" var="Nome" /]
+             &lt/div&gt
+             [@campo tipo="numero" titulo="Sua Idade" var="Idade" /]
+             [@campo tipo="selecao" titulo="Seu Sexo" var="Sexo" opcao="Masculino;Feminino" /]
+          &lt/div&gt
+       [/@grupo]
+    [/@entrevista]
+                    </code>
+                </pre>
+        <p>Dessa forma o campo de tipo="texto" será maior que os demais campos.</p>
+    </section>
+</body>
+</html>

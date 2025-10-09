@@ -1,181 +1,192 @@
-<!-- Parte sobre Formulários -->
-<section id="Entrevista" class="content-section">
-    <h1>Como usar a macro [@campo/]</h1>
-    <p>Como dito anteriormente a macro [@campo/] não terá um corpo ela ínicia e acaba na mesma linha sendo
-        fechada por uma "/",
-        Essa macro suporta alguns parâmetros os quais podem variar dependendo do tipo do campo, porém todos os
-        campos compartilham parâmetros entre eles os quais são:
-        </br></br>
-    <details>
-        <summary class="DropTextclick ">Parâmetros</summary>
-        <div style="margin-left: 8px;" class="dropdown-menu">
-            <strong>tipo=""</strong></br>
-            <strong>var=""</strong></br>
-            <strong>titulo=""</strong></br>
-            <strong>default=""</strong></br>
-            <strong>obrigatorio=""</strong></br>
-            <strong>maxcaracteres=""</strong></br>
-            <strong>reler=""</strong></br>
-            <strong>atts=""</strong></br>
-        </div>
-    </details>
-    </p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro Campo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Parte sobre Formulários -->
+    <section id="Entrevista" class="content-section">
+        <h1>Como usar a macro [@campo/]</h1>
+        <p>Como dito anteriormente a macro [@campo/] não terá um corpo ela ínicia e acaba na mesma linha sendo
+            fechada por uma "/",
+            Essa macro suporta alguns parâmetros os quais podem variar dependendo do tipo do campo, porém todos os
+            campos compartilham parâmetros entre eles os quais são:
+            </br></br>
+        <details>
+            <summary class="DropTextclick ">Parâmetros</summary>
+            <div style="margin-left: 8px;" class="dropdown-menu">
+                <strong>tipo=""</strong></br>
+                <strong>var=""</strong></br>
+                <strong>titulo=""</strong></br>
+                <strong>default=""</strong></br>
+                <strong>obrigatorio=""</strong></br>
+                <strong>maxcaracteres=""</strong></br>
+                <strong>reler=""</strong></br>
+                <strong>atts=""</strong></br>
+            </div>
+        </details>
+        </p>
 
-    <h2>Parâmetro (tipo)</h2>
-    <p>Como o próprio nome descreve, nele você irá escolher o tipo de campo, podendo ser:
-    <details>
-        <summary class="DropTextclick">Tipos de Campo</summary>
-        <ol style="text-align: start; padding-bottom: 10px; margin-left: 8px;">
-            <li><strong>texto:</strong> Campo de texto padrão</li>
-            <li><strong>numero:</strong> Campo de texto para entrada de número inteiro</li>
-            <li><strong>oculto:</strong> Campo do tipo "hidden" do HTML</li>
-            <li><strong>cpf:</strong> Campo de texto para entrada de CPF</li>
-            <li><strong>memo:</strong> Campo do tipo "textarea" do HTML</li>
-            <li><strong>editor:</strong> Campo para mostrar o CKEditor</li>
-            <li><strong>cnpj:</strong> Campo de texto para entrada de CNPJ</li>
-            <li><strong> selecao:</strong> Campo do tipo "select" do HTML, para as opções se usa o parâmetro
-                <strong>opcao=""</strong> separando as opções por <strong>";"</strong>:
-            </li>
-            <br>
-            <strong>Exemplo de campo do tipo selecao:</strong>
-            <pre>
-                                <code>
-[@campo tipo="selecao" opcao="1;2;3;4" /]</code>
-                            </pre>
-            <li><strong> pessoa:</strong> Campo de seleção de pessoas cadastradas no sistema</li>
-            <li><strong> lotacao:</strong> Campo de seleção de lotação cadastradas no sistema</li>
-            <li><strong> cossignatario:</strong> Campo para seleção de cossignatário (será automaticamente
-                incluído na lista de cossignatários do documento)</li>
-            <li><strong> data:</strong> Campo de texto para entrada de data</li>
-            <li><strong> hora:</strong> Campo de texto para entrada de hora</li>
-            <li><strong> valor:</strong> Campo de texto para entrada de valor monetário</li>
-            <li><strong> radio:</strong> Campo do tipo "radio" do HTML</li>
-            <li><strong> checkbox:</strong> Campo do tipo "checkbox" do HTML</li>
-        </ol>
-    </details>
-    Para a maior parte dos campos, funcionara da sequinte forma:
-    </p>
-    <strong>Exemplo de campo do tipo texto:</strong>
-    <pre>
-                <code>
-[@campo tipo="texto" /]</code>
-            </pre>
-    <hr>
-    <h2>Parâmetro (var)</h2>
-    <p>Esse parâmetro será a variável que guardará a informação passada no campo, Evite usar simbulos ou letras
-        com acentos no nome.<br>
-        As variáveis criadas nos campos podem ser utilizadas para mostrar as informações recebidas no documento.
-    </p>
-    <strong>Exemplo de como usar o parâmetro var:</strong>
-    <pre>
-                <code>
-[@campo tipo="selecao" <strong>var="ValorSelecionado"</strong> opcao="1;2;3;4" /]</code>
-            </pre>
-    <hr>
-    <h2>Parâmetro (Titulo)</h2>
-    <p>Esse parâmetro funciona como o label do html, sendo assim ele será o titulo acima do seu input.<br>
-        Usar nomes claros para os títulos ajudam na utilização do formulário.
-    </p>
-    <strong>Exemplo de como usar o parâmetro titulo:</strong>
-    <pre>
-                <code>
-[@campo <strong>titulo="Gênero dos destinatários"</strong> tipo="selecao" var="Genero" opcao="Masculino;Feminino" /]</code>
-            </pre>
-    <hr>
-    <h2>Parâmetro (default)</h2>
-    <p>ele servirá para caso você precise adicionar um valor por padrão a um campo, por exemplo, se precisar que
-        o campo já comece com o número 1, pode passa
-        o parâmetro da seguinte forma <strong>default="1"</strong>, para alguns campos o default precisa ser
-        passado sem aspas.
-    </p>
-    <strong>Exemplo de como usar o parâmetro default:</strong>
-    <pre>
-                <code>
-[@campo titulo="digite um número" tipo="numero" var="numeroDigitado" <strong>default=1</strong> /]</code>
-            </pre>
-    <p>Desta forma seu campo sempre iniciará com o número 1 digitado.
-    </p>
-    <hr>
-    <h2>Parâmetro (obrigatorio)</h2>
-    <p>ele funciona como uma abstração de um parâmetro HTML funcionando como <strong>required</strong>,
-        se caso o campo não for preenchido e o formulário finalizado o campo ficara com suas bordas vermelhas e
-        aparecerá uma mensagem dizendo que ele é obrigatório
-    </p>
-    <strong>Exemplo de como usar o parâmetro obrigatorio:</strong>
-    <pre>
-                <code>
-[@campo titulo="digite um número" tipo="numero" var="numeroDigitado" default=1 <strong>obrigatorio="sim"</strong>/]</code>
-            </pre>
-    <p>Esse parâmetro funciona de duas forma, podendo receber as strings <strong>"sim" ou "não"</strong> ou
-        valores booleanos <strong>true ou false</strong>,
-        isso dependerá do tipo de campo escolhido.
-    </p>
-    <hr>
-    <h2>Parâmetro (maxcaracteres)</h2>
-    <p>Este é um limitador de caracteres, deixando com que o usuário não consiga digitar nada além do que foi
-        definido, por exemplo, se você definir para que
-        o campo receba somente 10 caracteres <strong>maxcaracteres="10"</strong> o usuário não conseguira
-        digitar nada acima de 10 caracteres.
-    </p>
-    <strong>Exemplo de como usar o parâmetro maxcaracteres:</strong>
-    <pre>
-                <code>
-[@campo titulo="digite um número" tipo="numero" var="numeroDigitado" default=1 obrigatorio="sim" <strong>maxcaracteres="10"</strong> /]</code>
-            </pre>
-    <hr>
-    <h2>Parâmetro (reler)</h2>
-    <p>Esse parâmetro é realiza um reload da página para que um novo campo ou um novo dado seja mostrado ou
-        inserido, por exemplo, se você quiser que uma informação
-        do backend seja exibida no front e ela não vier automaticamente, adicione um reler ao campo, que ao ser
-        selecionado e perder o foco a página reinicia para
-        exibir a nova informação.
-        <br><br>
-        Para que ele funcione, você precisa para para ele um valor que pode ser Booleano ou String, depende do campo que
-        for utilizado,
-        no campo de texto o valor passodo é <strong>true</strong> no campo de numero o valor é <strong>sim</strong>
-    </p>
-    <strong>Exemplo de como usar o parâmetro reler:</strong>
-    <pre>
-                <code>
-[@campo titulo="digite um número" tipo="numero" var="numeroDigitado" obrigatorio="sim" maxcaracteres="10" <strong>reler="sim"</strong>/]<br>
-[@campo titulo="digite seu nome" tipo="texto" var="NomePessoa" obrigatorio="sim" <strong>reler=true</strong>/]</code>
-            </pre>
-    <p style="text-indent: 1.5cm;"> <strong>Dica: </strong> Use o reler=true com moderação. Em formulários muito
-        grandes, recarregar a página com frequência
-        pode atrapalhar a experiência do usuário.
-    </p>
-    <hr>
-    <h2>Parâmetro (atts)</h2>
-    <p>diferente dos demais esse parâmetro funciona para adicionar parâmetros do html como "readonly, required e
-        disabled", no seu formulário do siga, para usar
-        é muito simples:<br><br>
-        dentro do seu campo adicione: atts="{'required':'required'}"
-    </p>
-    <strong>Exemplo de como usar o parâmetro atts:</strong>
-    <pre>
-                <code>
-[@campo titulo="Nome do usuário" tipo="texto" var="Nome" default="Thainan Vinicius Katchan" <strong>atts="{'disabled':'disabled'}"</strong> /]</code>
-            </pre>
-    <hr>
-    <H4 class="Avancado">Tópico Avançado</H4>
-    <h2>Parâmetro (idAjax)</h2>
-    <p>Para usar o Ajax dentro dos formulários é simples e fácil, mas para essa parte você precisara ter entendido
-        o funcionamento dos <strong><a href="#api" class="texto-link">[@grupo]</a></strong>, além disso será de extrema
-        importância
-        o conhecimento prévio do funcionamento das condições <strong><a href="#FreeMarkerForm"
-                class="texto-link">[#if]</a></strong>,
-        o ajax é utilizado para que a página não precise ser atualizada para que um novo campo ou informação apareçam
-        ,a melhor utilização do idAjax é com o campo <strong>[@selecao]</strong>.
-    </p>
-    <strong>Exemplo de como usar o idAjax:</strong>
-    <pre><code>[@entrevista]
-	[@selecao titulo="Tipo de campo" var="TipoDado" idAjax="TipoDadoAjax" reler=true opcoes="Selecione;Número;Texto"/]
-    [@grupo depende="TipoDadoAjax"]
-    	[#if TipoDado == "Número"]
-    		[@numero titulo="Digite um número" var="Numero" /]
-        [#elseif TipoDado == "Texto"]
-        	[@texto titulo="Digite um texto" var="Texto" /]
-        [/#if]
-    [/@grupo]
-[/@entrevista]</code></pre>
-</section>
+        <h2>Parâmetro (tipo)</h2>
+        <p>Como o próprio nome descreve, nele você irá escolher o tipo de campo, podendo ser:
+        <details>
+            <summary class="DropTextclick">Tipos de Campo</summary>
+            <ol style="text-align: start; padding-bottom: 10px; margin-left: 8px;">
+                <li><strong>texto:</strong> Campo de texto padrão</li>
+                <li><strong>numero:</strong> Campo de texto para entrada de número inteiro</li>
+                <li><strong>oculto:</strong> Campo do tipo "hidden" do HTML</li>
+                <li><strong>cpf:</strong> Campo de texto para entrada de CPF</li>
+                <li><strong>memo:</strong> Campo do tipo "textarea" do HTML</li>
+                <li><strong>editor:</strong> Campo para mostrar o CKEditor</li>
+                <li><strong>cnpj:</strong> Campo de texto para entrada de CNPJ</li>
+                <li><strong> selecao:</strong> Campo do tipo "select" do HTML, para as opções se usa o parâmetro
+                    <strong>opcao=""</strong> separando as opções por <strong>";"</strong>:
+                </li>
+                <br>
+                <strong>Exemplo de campo do tipo selecao:</strong>
+                <pre>
+                                    <code>
+    [@campo tipo="selecao" opcao="1;2;3;4" /]</code>
+                                </pre>
+                <li><strong> pessoa:</strong> Campo de seleção de pessoas cadastradas no sistema</li>
+                <li><strong> lotacao:</strong> Campo de seleção de lotação cadastradas no sistema</li>
+                <li><strong> cossignatario:</strong> Campo para seleção de cossignatário (será automaticamente
+                    incluído na lista de cossignatários do documento)</li>
+                <li><strong> data:</strong> Campo de texto para entrada de data</li>
+                <li><strong> hora:</strong> Campo de texto para entrada de hora</li>
+                <li><strong> valor:</strong> Campo de texto para entrada de valor monetário</li>
+                <li><strong> radio:</strong> Campo do tipo "radio" do HTML</li>
+                <li><strong> checkbox:</strong> Campo do tipo "checkbox" do HTML</li>
+            </ol>
+        </details>
+        Para a maior parte dos campos, funcionara da sequinte forma:
+        </p>
+        <strong>Exemplo de campo do tipo texto:</strong>
+        <pre>
+                    <code>
+    [@campo tipo="texto" /]</code>
+                </pre>
+        <hr>
+        <h2>Parâmetro (var)</h2>
+        <p>Esse parâmetro será a variável que guardará a informação passada no campo, Evite usar simbulos ou letras
+            com acentos no nome.<br>
+            As variáveis criadas nos campos podem ser utilizadas para mostrar as informações recebidas no documento.
+        </p>
+        <strong>Exemplo de como usar o parâmetro var:</strong>
+        <pre>
+                    <code>
+    [@campo tipo="selecao" <strong>var="ValorSelecionado"</strong> opcao="1;2;3;4" /]</code>
+                </pre>
+        <hr>
+        <h2>Parâmetro (Titulo)</h2>
+        <p>Esse parâmetro funciona como o label do html, sendo assim ele será o titulo acima do seu input.<br>
+            Usar nomes claros para os títulos ajudam na utilização do formulário.
+        </p>
+        <strong>Exemplo de como usar o parâmetro titulo:</strong>
+        <pre>
+                    <code>
+    [@campo <strong>titulo="Gênero dos destinatários"</strong> tipo="selecao" var="Genero" opcao="Masculino;Feminino" /]</code>
+                </pre>
+        <hr>
+        <h2>Parâmetro (default)</h2>
+        <p>ele servirá para caso você precise adicionar um valor por padrão a um campo, por exemplo, se precisar que
+            o campo já comece com o número 1, pode passa
+            o parâmetro da seguinte forma <strong>default="1"</strong>, para alguns campos o default precisa ser
+            passado sem aspas.
+        </p>
+        <strong>Exemplo de como usar o parâmetro default:</strong>
+        <pre>
+                    <code>
+    [@campo titulo="digite um número" tipo="numero" var="numeroDigitado" <strong>default=1</strong> /]</code>
+                </pre>
+        <p>Desta forma seu campo sempre iniciará com o número 1 digitado.
+        </p>
+        <hr>
+        <h2>Parâmetro (obrigatorio)</h2>
+        <p>ele funciona como uma abstração de um parâmetro HTML funcionando como <strong>required</strong>,
+            se caso o campo não for preenchido e o formulário finalizado o campo ficara com suas bordas vermelhas e
+            aparecerá uma mensagem dizendo que ele é obrigatório
+        </p>
+        <strong>Exemplo de como usar o parâmetro obrigatorio:</strong>
+        <pre>
+                    <code>
+    [@campo titulo="digite um número" tipo="numero" var="numeroDigitado" default=1 <strong>obrigatorio="sim"</strong>/]</code>
+                </pre>
+        <p>Esse parâmetro funciona de duas forma, podendo receber as strings <strong>"sim" ou "não"</strong> ou
+            valores booleanos <strong>true ou false</strong>,
+            isso dependerá do tipo de campo escolhido.
+        </p>
+        <hr>
+        <h2>Parâmetro (maxcaracteres)</h2>
+        <p>Este é um limitador de caracteres, deixando com que o usuário não consiga digitar nada além do que foi
+            definido, por exemplo, se você definir para que
+            o campo receba somente 10 caracteres <strong>maxcaracteres="10"</strong> o usuário não conseguira
+            digitar nada acima de 10 caracteres.
+        </p>
+        <strong>Exemplo de como usar o parâmetro maxcaracteres:</strong>
+        <pre>
+                    <code>
+    [@campo titulo="digite um número" tipo="numero" var="numeroDigitado" default=1 obrigatorio="sim" <strong>maxcaracteres="10"</strong> /]</code>
+                </pre>
+        <hr>
+        <h2>Parâmetro (reler)</h2>
+        <p>Esse parâmetro é realiza um reload da página para que um novo campo ou um novo dado seja mostrado ou
+            inserido, por exemplo, se você quiser que uma informação
+            do backend seja exibida no front e ela não vier automaticamente, adicione um reler ao campo, que ao ser
+            selecionado e perder o foco a página reinicia para
+            exibir a nova informação.
+            <br><br>
+            Para que ele funcione, você precisa para para ele um valor que pode ser Booleano ou String, depende do campo que
+            for utilizado,
+            no campo de texto o valor passodo é <strong>true</strong> no campo de numero o valor é <strong>sim</strong>
+        </p>
+        <strong>Exemplo de como usar o parâmetro reler:</strong>
+        <pre>
+                    <code>
+    [@campo titulo="digite um número" tipo="numero" var="numeroDigitado" obrigatorio="sim" maxcaracteres="10" <strong>reler="sim"</strong>/]<br>
+    [@campo titulo="digite seu nome" tipo="texto" var="NomePessoa" obrigatorio="sim" <strong>reler=true</strong>/]</code>
+                </pre>
+        <p style="text-indent: 1.5cm;"> <strong>Dica: </strong> Use o reler=true com moderação. Em formulários muito
+            grandes, recarregar a página com frequência
+            pode atrapalhar a experiência do usuário.
+        </p>
+        <hr>
+        <h2>Parâmetro (atts)</h2>
+        <p>diferente dos demais esse parâmetro funciona para adicionar parâmetros do html como "readonly, required e
+            disabled", no seu formulário do siga, para usar
+            é muito simples:<br><br>
+            dentro do seu campo adicione: atts="{'required':'required'}"
+        </p>
+        <strong>Exemplo de como usar o parâmetro atts:</strong>
+        <pre>
+                    <code>
+    [@campo titulo="Nome do usuário" tipo="texto" var="Nome" default="Thainan Vinicius Katchan" <strong>atts="{'disabled':'disabled'}"</strong> /]</code>
+                </pre>
+        <hr>
+        <H4 class="Avancado">Tópico Avançado</H4>
+        <h2>Parâmetro (idAjax)</h2>
+        <p>Para usar o Ajax dentro dos formulários é simples e fácil, mas para essa parte você precisara ter entendido
+            o funcionamento dos <strong><a href="#api" class="texto-link">[@grupo]</a></strong>, além disso será de extrema
+            importância
+            o conhecimento prévio do funcionamento das condições <strong><a href="#FreeMarkerForm"
+                    class="texto-link">[#if]</a></strong>,
+            o ajax é utilizado para que a página não precise ser atualizada para que um novo campo ou informação apareçam
+            ,a melhor utilização do idAjax é com o campo <strong>[@selecao]</strong>.
+        </p>
+        <strong>Exemplo de como usar o idAjax:</strong>
+        <pre><code>[@entrevista]
+        [@selecao titulo="Tipo de campo" var="TipoDado" idAjax="TipoDadoAjax" reler=true opcoes="Selecione;Número;Texto"/]
+        [@grupo depende="TipoDadoAjax"]
+            [#if TipoDado == "Número"]
+                [@numero titulo="Digite um número" var="Numero" /]
+            [#elseif TipoDado == "Texto"]
+                [@texto titulo="Digite um texto" var="Texto" /]
+            [/#if]
+        [/@grupo]
+    [/@entrevista]</code></pre>
+    </section>
+</body>
+</html>

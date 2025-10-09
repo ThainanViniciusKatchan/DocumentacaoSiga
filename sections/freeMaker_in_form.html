@@ -1,153 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando FreeMarker no Formulário</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <section id="FreeMarkerForm" class="content-section">
+        <h1>Como usar FreeMarker no Formulário</h1>
+        <p>Nesse Tópico vou abordar como se usa o FreeMarker no formulário, permitindo criar campos de forma
+            dinâmica adicionando ou removendo eles, calculos e condições, Diferente das macros
+            do Siga-Doc as estruturas do Freemarker usam um <strong>#</strong> para serem reconhecidas, sendo Assim
+            para usar elas basta adicionar, por exemplo, <strong>[#Estrutura]</strong> fechando da seguinte forma
+            <strong>[/#Estrutura]</strong>.
+        </p>
+        <hr>
+        <h3>Condições IF, ELSE IF e ELSE</h3>
+        <p>
+            No FreeMarker as condições funcionam como em qualquer outra linguagem, se quer que algo seja mostrado
+            somente após um valor específico ser inserido, basta adicionar uma condição para isso,
+            gerando um caminho bloqueado ou aberto para o que deseja realizar.
+        </p>
+        <h3>Exemplo de [#if]:</h3>
+        <pre><code>[@entrevista]
+    [@selecao opcoes="Selecione;Sim;Não" var="OpcaoSelecionada" titulo="Deseja mostrar a mensagem?" reler=true/]
+    [#if OpcaoSelecionada == "Sim"]
+        &ltp style="color: orangered;"&gtMensagem de texto ao usuário&lt/p&gt
+    [/#if]
+    [/@entrevista]</code></pre>
+        <p>Para usar as demais estruturas o conceito é o mesmo, mas somente o [#if] deve ser fechado com [/#if]
+            os demais ficaram dependentes da estrutura if, por exemplo:
+        <pre><code>[#if Condição]
+    [#else if Condição]
+    [#else]
+    [/#if]</code></pre>
 
-<section id="FreeMarkerForm" class="content-section">
-    <h1>Como usar FreeMarker no Formulário</h1>
-    <p>Nesse Tópico vou abordar como se usa o FreeMarker no formulário, permitindo criar campos de forma
-        dinâmica adicionando ou removendo eles, calculos e condições, Diferente das macros
-        do Siga-Doc as estruturas do Freemarker usam um <strong>#</strong> para serem reconhecidas, sendo Assim
-        para usar elas basta adicionar, por exemplo, <strong>[#Estrutura]</strong> fechando da seguinte forma
-        <strong>[/#Estrutura]</strong>.
-    </p>
-    <hr>
-    <h3>Condições IF, ELSE IF e ELSE</h3>
-    <p>
-        No FreeMarker as condições funcionam como em qualquer outra linguagem, se quer que algo seja mostrado
-        somente após um valor específico ser inserido, basta adicionar uma condição para isso,
-        gerando um caminho bloqueado ou aberto para o que deseja realizar.
-    </p>
-    <h3>Exemplo de [#if]:</h3>
-    <pre><code>[@entrevista]
-[@selecao opcoes="Selecione;Sim;Não" var="OpcaoSelecionada" titulo="Deseja mostrar a mensagem?" reler=true/]
-[#if OpcaoSelecionada == "Sim"]
-    &ltp style="color: orangered;"&gtMensagem de texto ao usuário&lt/p&gt
-[/#if]
-[/@entrevista]</code></pre>
-    <p>Para usar as demais estruturas o conceito é o mesmo, mas somente o [#if] deve ser fechado com [/#if]
-        os demais ficaram dependentes da estrutura if, por exemplo:
-    <pre><code>[#if Condição]
-[#else if Condição]
-[#else]
-[/#if]</code></pre>
+        Perceba que o if foi aberto e fechado e as demaiws estruturas ficaram dentro do seu "corpo".
+        <h3>Exemplo de utilização do [#elseif] e [#else]:</h3>
+        <pre><code>[@entrevista]
+       [@selecao opcoes="Selecione;Sim;Não" var="OpcaoSelecionada" titulo="Deseja mostrar a mensagem?" reler=true/]
+       [#if OpcaoSelecionada == "Sim"]
+          &ltp style="color: orangered;"&gtMensagem ou campo aparece&lt/p&gt
+       [#elseif OpcaoSelecionada == "Não"]
+           &ltp style="color: blue;"&gtOutra mensagem ou campo aparece&lt/p&gt
+       [#else]
+          &ltp style="color: green;"&gtMensagem ou campo diferente&lt/p&gt
+       [/#if]
+    [/@entrevista]</code></pre>
+        </p>
+        <hr>
+        <h3>Usando o list (Estrutura equivalente ao for)</h3>
+        <p>
+            Dentro do Freemarker existe a estrutura <strong>list</strong> permitindo iterar dados, para usar é muito
+            simples, por exemplo: <strong>[#list]</strong> sendo fechado por um <strong>[/#list]</strong>.
+            <br><br>
+            Com os formulários a principal utilização do <strong>list</strong> é criar campos dinâmicamente iterando
+            um valor numérico,
+            Por exemplo, vamos supor que o usuário precisa adicionar vários campos de busca de pessoa no sistema o
+            campo [@pessoa],
+            para isso ela passa o valor de pessoa que deseja, por exemplo, 5 campos do tipo pessoa, apartir desse
+            valor sugirá cinco campos de pesquisa de pessoa.
+        </p>
+        <h3>Código de Exemplo:</h3>
+        <pre><code>[@entrevista]
+       [@grupo titulo="Pesquisar Pessoa"]
+          [@campo tipo="numero" titulo="Quantas pessoas quer pesquisar?" var="QuantiPessoas" default="0" reler=true/]
+          [#if QuantiPessoas??]
+            [#list 1..(QuantiPessoas)?number as i]
+              [@pessoa titulo="${i}ºPessoa" var="Pessoa${i}"/]
+            [/#list]
+          [/#if]
+       [/@grupo]
+    [/@entrevista]</code></pre>
+        <p>A função <strong>?number</strong> é utilizada para mostrar ao list que aquela variável é numérica.
+            <br><br>
+            Neste exemplo a estrutura <strong>list</strong> contará de 1 o exato número digitado.
+        </p>
+        <hr>
 
-    Perceba que o if foi aberto e fechado e as demaiws estruturas ficaram dentro do seu "corpo".
-    <h3>Exemplo de utilização do [#elseif] e [#else]:</h3>
-    <pre><code>[@entrevista]
-   [@selecao opcoes="Selecione;Sim;Não" var="OpcaoSelecionada" titulo="Deseja mostrar a mensagem?" reler=true/]
-   [#if OpcaoSelecionada == "Sim"]
-      &ltp style="color: orangered;"&gtMensagem ou campo aparece&lt/p&gt
-   [#elseif OpcaoSelecionada == "Não"]
-   	&ltp style="color: blue;"&gtOutra mensagem ou campo aparece&lt/p&gt
-   [#else]
-      &ltp style="color: green;"&gtMensagem ou campo diferente&lt/p&gt
-   [/#if]
-[/@entrevista]</code></pre>
-    </p>
-    <hr>
-    <h3>Usando o list (Estrutura equivalente ao for)</h3>
-    <p>
-        Dentro do Freemarker existe a estrutura <strong>list</strong> permitindo iterar dados, para usar é muito
-        simples, por exemplo: <strong>[#list]</strong> sendo fechado por um <strong>[/#list]</strong>.
-        <br><br>
-        Com os formulários a principal utilização do <strong>list</strong> é criar campos dinâmicamente iterando
-        um valor numérico,
-        Por exemplo, vamos supor que o usuário precisa adicionar vários campos de busca de pessoa no sistema o
-        campo [@pessoa],
-        para isso ela passa o valor de pessoa que deseja, por exemplo, 5 campos do tipo pessoa, apartir desse
-        valor sugirá cinco campos de pesquisa de pessoa.
-    </p>
-    <h3>Código de Exemplo:</h3>
-    <pre><code>[@entrevista]
-   [@grupo titulo="Pesquisar Pessoa"]
-      [@campo tipo="numero" titulo="Quantas pessoas quer pesquisar?" var="QuantiPessoas" default="0" reler=true/]
-      [#if QuantiPessoas??]
-        [#list 1..(QuantiPessoas)?number as i] 
-          [@pessoa titulo="${i}ºPessoa" var="Pessoa${i}"/]
-        [/#list]
+        <h3>Criação de variável:</h3>
+        <p>Dentro do FreeMarker é possível criar variáveis, são variáveis simples sem tipagem mas com grande utilização,
+            para isso basta adicionar <br><strong>[#assign Nome = "SigaSorriso"]</strong>, se você quiser adicionar uma
+            String,
+            basta colocar o texto dentro do aspas, se for um número basta digitar o número sem aspas, para utilizar a
+            variável
+            adicione ela mo meio de duas chaves com um sinal de sifrão no antes, dessa forma:
+            <strong>${Nome}</strong>.<br><br>
+            Assim será possível visualizar a informação contente na variável.
+        </p>
+
+        <pre><code>[@entrevista]
+        [#assign Nome = "SigaSorriso"]
+        ${SigaSorriso}
+    [/@entrevista]</code></pre>
+        <hr>
+        <h3>Calculos com FreeMarker</h3>
+        <p>
+            Para realizar calculos no FreeMarker você precisa criar uma variável que receba o valor final, usar os
+            operadores básicos <strong>+, -, /,*.</strong>, e obviamente os valores para calcular.
+        </p>
+        <h3>Exemplo de calculo:</h3>
+        <pre><code>[#assign variavel = 200 + 1]
+    [#assign variavel = 200 - 1]
+    [#assign variavel = 200 / 1]
+    [#assign variavel = 200 * 2]</code></pre>
+        <p>Para realizar Calculo Com variáveis criadas em campos, você terá que fazer uma valição da existencia
+            dessas variáveis, neste exemplo adicionei um valor padrão com o Parâmetro <strong>default=0</strong>
+            para evitar erro de variável null, outra forma de se fazer isso seria adicionando o a função
+            <strong>?has_content</strong> a condição, neste caso o calculo só iria ocorrer após os dois
+            valores serem preenchidos, segue abaixo os exemplos de código:
+        </p>
+        <h3>Exemplo com default:</h3>
+        <pre><code>[@entrevista]
+      [@numero var="N1" titulo="1º Número" reler="sim" default=0 /]
+      [@numero var="N2" titulo="2º Número" reler="sim" default=0/]
+      [#if N1?? && N2??]
+        [#assign Valor = (N1?number) + (N2?number)]
+        ${Valor!}
       [/#if]
-   [/@grupo]
-[/@entrevista]</code></pre>
-    <p>A função <strong>?number</strong> é utilizada para mostrar ao list que aquela variável é numérica.
-        <br><br>
-        Neste exemplo a estrutura <strong>list</strong> contará de 1 o exato número digitado.
-    </p>
-    <hr>
-
-    <h3>Criação de variável:</h3>
-    <p>Dentro do FreeMarker é possível criar variáveis, são variáveis simples sem tipagem mas com grande utilização,
-        para isso basta adicionar <br><strong>[#assign Nome = "SigaSorriso"]</strong>, se você quiser adicionar uma
-        String,
-        basta colocar o texto dentro do aspas, se for um número basta digitar o número sem aspas, para utilizar a
-        variável
-        adicione ela mo meio de duas chaves com um sinal de sifrão no antes, dessa forma:
-        <strong>${Nome}</strong>.<br><br>
-        Assim será possível visualizar a informação contente na variável.
-    </p>
-
-    <pre><code>[@entrevista]
-    [#assign Nome = "SigaSorriso"]
-    ${SigaSorriso}
-[/@entrevista]</code></pre>
-    <hr>
-    <h3>Calculos com FreeMarker</h3>
-    <p>
-        Para realizar calculos no FreeMarker você precisa criar uma variável que receba o valor final, usar os
-        operadores básicos <strong>+, -, /,*.</strong>, e obviamente os valores para calcular.
-    </p>
-    <h3>Exemplo de calculo:</h3>
-    <pre><code>[#assign variavel = 200 + 1]
-[#assign variavel = 200 - 1]
-[#assign variavel = 200 / 1]
-[#assign variavel = 200 * 2]</code></pre>
-    <p>Para realizar Calculo Com variáveis criadas em campos, você terá que fazer uma valição da existencia
-        dessas variáveis, neste exemplo adicionei um valor padrão com o Parâmetro <strong>default=0</strong>
-        para evitar erro de variável null, outra forma de se fazer isso seria adicionando o a função
-        <strong>?has_content</strong> a condição, neste caso o calculo só iria ocorrer após os dois
-        valores serem preenchidos, segue abaixo os exemplos de código:
-    </p>
-    <h3>Exemplo com default:</h3>
-    <pre><code>[@entrevista]
-  [@numero var="N1" titulo="1º Número" reler="sim" default=0 /]
-  [@numero var="N2" titulo="2º Número" reler="sim" default=0/]
-  [#if N1?? && N2??]
-    [#assign Valor = (N1?number) + (N2?number)]
-    ${Valor!}
-  [/#if]
-[/@entrevista]</pre></code>
-    <p>Perceba que mesmo não utilizando a função <strong>?has_content</strong> preciso validar a existência
-        das variáveis, adicionando <strong>??</strong> a frente da variável, além disso para que o calculo seja feito
-        preciso dizer ao Freemarker que nossa variável é númerica, adicionando as variáveis entre parênteses e a função
-        <strong>?number</strong> durante o calculo Essa função pode ser usada dentro de <strong>[#if]</strong> também,
-        caso a validação dependa de um número.
-    </p>
-    <h3>Exemplo com ?has_content:</h3>
-    <pre><code>[@entrevista]
-  [@numero var="N1" titulo="1º Número" reler="sim" /]
-  [@numero var="N2" titulo="2º Número" reler="sim" /]
-  [#if N1?has_content && N2?has_content]
-    [#assign Valor = (N1?number) + (N2?number)]
-    ${Valor!}
-  [/#if]
-[/@entrevista]</pre></code>
-    <p>Agora quando utilizo o <strong>?has_content</strong>, se o valor da variável permanecer vázio, ele não será
-        passado ao Calculo
-        evitando assim erros de valor nulo.<br><br>
-        E se eu não dizer ao FreeMarker que vamos calcular um número o que acontece?<br>
-        Bem, caso isso não ocora, você ira concatenar os valores colocando um a frente do outro, dessa forma,
-        <strong>30 + 20</strong> se torna <strong>3020</strong> e não <strong>50 </strong> já que o valor não
-        foi calculado e sim concatenado.
-    </p>
-    <h3>Exemplo de Concatenação</h3>
-    <pre><code>[@entrevista]
-  [@numero var="N1" titulo="1º Número" reler="sim" /]
-  [@numero var="N2" titulo="2º Número" reler="sim" /]
-  [#if N1?has_content && N2?has_content]
-    [#assign Valor = (N1) + (N2)]
-    ${Valor!}
-  [/#if]
-[/@entrevista]</pre></code>
-    <hr>
-    <p>De forma básica são essas as estruturas mais utilizadas dentro da macro de entrevistas, caso queira se aprofundar
-        mais,
-        sobre o Freemarker, basta <a target="_blank" href="https://freemarker.apache.org/index.html" style="text-decoration: nome;
-                color: black;">clicar aqui</a>
-    </p>
-</section>
+    [/@entrevista]</pre></code>
+        <p>Perceba que mesmo não utilizando a função <strong>?has_content</strong> preciso validar a existência
+            das variáveis, adicionando <strong>??</strong> a frente da variável, além disso para que o calculo seja feito
+            preciso dizer ao Freemarker que nossa variável é númerica, adicionando as variáveis entre parênteses e a função
+            <strong>?number</strong> durante o calculo Essa função pode ser usada dentro de <strong>[#if]</strong> também,
+            caso a validação dependa de um número.
+        </p>
+        <h3>Exemplo com ?has_content:</h3>
+        <pre><code>[@entrevista]
+      [@numero var="N1" titulo="1º Número" reler="sim" /]
+      [@numero var="N2" titulo="2º Número" reler="sim" /]
+      [#if N1?has_content && N2?has_content]
+        [#assign Valor = (N1?number) + (N2?number)]
+        ${Valor!}
+      [/#if]
+    [/@entrevista]</pre></code>
+        <p>Agora quando utilizo o <strong>?has_content</strong>, se o valor da variável permanecer vázio, ele não será
+            passado ao Calculo
+            evitando assim erros de valor nulo.<br><br>
+            E se eu não dizer ao FreeMarker que vamos calcular um número o que acontece?<br>
+            Bem, caso isso não ocora, você ira concatenar os valores colocando um a frente do outro, dessa forma,
+            <strong>30 + 20</strong> se torna <strong>3020</strong> e não <strong>50 </strong> já que o valor não
+            foi calculado e sim concatenado.
+        </p>
+        <h3>Exemplo de Concatenação</h3>
+        <pre><code>[@entrevista]
+      [@numero var="N1" titulo="1º Número" reler="sim" /]
+      [@numero var="N2" titulo="2º Número" reler="sim" /]
+      [#if N1?has_content && N2?has_content]
+        [#assign Valor = (N1) + (N2)]
+        ${Valor!}
+      [/#if]
+    [/@entrevista]</pre></code>
+        <hr>
+        <p>De forma básica são essas as estruturas mais utilizadas dentro da macro de entrevistas, caso queira se aprofundar
+            mais,
+            sobre o Freemarker, basta <a target="_blank" href="https://freemarker.apache.org/index.html" style="text-decoration: nome;
+                    color: black;">clicar aqui</a>
+        </p>
+    </section>
+</body>
+</html>

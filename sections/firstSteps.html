@@ -1,69 +1,80 @@
-<section id="primeiros-passos" class="content-section">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiros Passos</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <section id="primeiros-passos" class="content-section">
 
-    <h1>Primeiros Passos</h1>
-    <p>Siga estes passos para utilizar o FreeMarker em seu ambiente local.</p>
+        <h1>Primeiros Passos</h1>
+        <p>Siga estes passos para utilizar o FreeMarker em seu ambiente local.</p>
 
-    <h2>Principais Macros (Já existentes no Siga-Doc)</h2>
-    <hr>
-    <h3 id="campoPrimeirosPassos">Macro Campo</h3>
-    <p>A macro [@campo/] de forma geral é o que vai formar seu formulário, elas são responsáveis por criar
-        inputs de diversos tipos,
-        como texto, número, email, cpf, .etc, abordaremos para a frete os tipos de inputs que o sistema suporta
-        nativamente.
-        </br></br>
-        Perceba que essa macro se ínicia e fecha na mesma linha, sem a necessidade de um corpo.
-    </p>
+        <h2>Principais Macros (Já existentes no Siga-Doc)</h2>
+        <hr>
+        <h3 id="campoPrimeirosPassos">Macro Campo</h3>
+        <p>A macro [@campo/] de forma geral é o que vai formar seu formulário, elas são responsáveis por criar
+            inputs de diversos tipos,
+            como texto, número, email, cpf, .etc, abordaremos para a frete os tipos de inputs que o sistema suporta
+            nativamente.
+            </br></br>
+            Perceba que essa macro se ínicia e fecha na mesma linha, sem a necessidade de um corpo.
+        </p>
 
-    <pre>
-                <code>
-[@campo/]</code>
-            </pre>
-    <hr>
-    <h3 id="campoPrimeirosPassos">Macro Grupo</h3>
-    <p>A macro [@grupo/] ajuda a organizar seus campos em grupos com um titulo e separados por uma linha, ela
-        contem um corpo, onde ficara as macros de campo.
-    </p>
-    <pre>
-                <code>
-[@grupo]
-[/@grupo]</code>
+        <pre>
+                    <code>
+    [@campo/]</code>
+                </pre>
+        <hr>
+        <h3 id="campoPrimeirosPassos">Macro Grupo</h3>
+        <p>A macro [@grupo/] ajuda a organizar seus campos em grupos com um titulo e separados por uma linha, ela
+            contem um corpo, onde ficara as macros de campo.
+        </p>
+        <pre>
+                    <code>
+    [@grupo]
+    [/@grupo]</code>
 
-            </pre>
-    <hr>
-    <h3 id="EntrevistaPrimeirosPassos">Macro Entrevista</h3>
-    <p>Essa macro serve para a criaçõa de formulários, ela faz o trabalho de reconhecer as marcos de campo e
-        traduzir para
-        código html com BootStrap.
-    </p>
-    <pre>
-                <code>
-[@Entrevista]
-[/@Entrevista]</code>
-            </pre>
-    <hr>
-    <h3>Macro Documento</h3>
-    <p> A macro Documento tem o papel de receber códigos HTML5 e CSS3, básicamente é ela quem vai mostrar seu
-        modelo pronto formato de PDF.
+                </pre>
+        <hr>
+        <h3 id="EntrevistaPrimeirosPassos">Macro Entrevista</h3>
+        <p>Essa macro serve para a criaçõa de formulários, ela faz o trabalho de reconhecer as marcos de campo e
+            traduzir para
+            código html com BootStrap.
+        </p>
+        <pre>
+                    <code>
+    [@Entrevista]
+    [/@Entrevista]</code>
+                </pre>
+        <hr>
+        <h3>Macro Documento</h3>
+        <p> A macro Documento tem o papel de receber códigos HTML5 e CSS3, básicamente é ela quem vai mostrar seu
+            modelo pronto formato de PDF.
 
-    </p>
-    <pre>
-                <code>
-[@documento]
-[/@documento]</code>
-            </pre>
-    <hr>
-    <h3>Macro Cabeçalho</h3>
-    <p>Essa macro é responsável por mostrar um cabeçalho no seu documento, por padrão o sistema vem com algun
-        modelos prontos,
-        como a macro [@estiloBrasaoCentralizado], além de montar e exibir um cabeçalho essa macro também é
-        responsável pela númeração das páginas,
-        mostrar a classificação documental, receber o tipo de documento, e pode receber alguns parâmetros
-        personalizados, como exibir a data na parte de
-        cima ou de baixo do documento.
-    </p>
-    <pre>
-                <code>
-[@estiloBrasaoCentralizado]
-[/@estiloBrasaoCentralizado]</code>
-            </pre>
-</section>
+        </p>
+        <pre>
+                    <code>
+    [@documento]
+    [/@documento]</code>
+                </pre>
+        <hr>
+        <h3>Macro Cabeçalho</h3>
+        <p>Essa macro é responsável por mostrar um cabeçalho no seu documento, por padrão o sistema vem com algun
+            modelos prontos,
+            como a macro [@estiloBrasaoCentralizado], além de montar e exibir um cabeçalho essa macro também é
+            responsável pela númeração das páginas,
+            mostrar a classificação documental, receber o tipo de documento, e pode receber alguns parâmetros
+            personalizados, como exibir a data na parte de
+            cima ou de baixo do documento.
+        </p>
+        <pre>
+                    <code>
+    [@estiloBrasaoCentralizado]
+    [/@estiloBrasaoCentralizado]</code>
+                </pre>
+    </section>
+</body>
+</html>

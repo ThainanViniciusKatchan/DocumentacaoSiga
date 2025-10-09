@@ -4,12 +4,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');
 
-    // Função para carregar conteúdo. Não precisa mudar.
+    // Função para carregar conteúdo.
     async function loadContent(url) {
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Arquivo não encontrado: ${url}`);
-            mainContent.innerHTML = await response.text();
+            const text = await response.text();
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const section = doc.querySelector('.content-section');
+
+            if (section) {
+                mainContent.innerHTML = section.innerHTML;
+            } else {
+                mainContent.innerHTML = text;
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             console.error("Erro ao carregar:", error);
@@ -67,8 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função de carregamento inicial
     function loadInitialPage() {
-        // Tenta carregar a página da URL atual, ou vai para a página padrão
-        let initialUrl = window.location.pathname.substring(1); // remove a primeira barra "/"
+        const baseHref = document.baseURI.substring(window.location.origin.length);
+        let path = window.location.pathname;
+
+        if (path.startsWith(baseHref)) {
+            path = path.substring(baseHref.length);
+        }
+
+        let initialUrl = path;
         if (initialUrl === '' || initialUrl === 'index.html') {
             const firstLink = document.querySelector('.nav-link:not(.dropdown-toggle)');
             initialUrl = firstLink ? firstLink.getAttribute('href') : 'sections/introduction.html';
